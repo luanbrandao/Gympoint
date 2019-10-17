@@ -11,6 +11,11 @@ import rotues from './routes';
 // yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
 // todos os arquivos dentro da pasta src sao ajustados com o eslint automaticamente
 // yarn eslint --fix src --ext .js
+
+// yarn add sequelize
+// ajuda na criação de models e migrations
+// yarn add sequelize-cli -D
+// yarn add pg pg-hstore
 class App {
   constructor() {
     this.server = express();
