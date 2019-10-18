@@ -18,6 +18,8 @@ import './database';
 // yarn add pg pg-hstore
 // yarn add bcryptjs
 // yarn add jsonwebtoken
+// validação de form
+// yarn add yup
 class App {
   constructor() {
     this.server = express();
