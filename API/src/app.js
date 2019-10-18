@@ -16,7 +16,7 @@ import './database';
 // ajuda na criação de models e migrations
 // yarn add sequelize-cli -D
 // yarn add pg pg-hstore
-
+// yarn add bcryptjs
 class App {
   constructor() {
     this.server = express();
