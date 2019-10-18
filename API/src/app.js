@@ -1,6 +1,6 @@
 import express from 'express';
 import rotues from './routes';
-
+import './database';
 // yarn init -y
 // yarn add express
 // para usar import
@@ -16,6 +16,7 @@ import rotues from './routes';
 // ajuda na criação de models e migrations
 // yarn add sequelize-cli -D
 // yarn add pg pg-hstore
+
 class App {
   constructor() {
     this.server = express();
