@@ -16,17 +16,21 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      phone: {
+        type: Sequelize.STRING(15),
+        allowNull: false,
+      },
       height: {
         type: Sequelize.DOUBLE,
-        allowNull: false,
+        allowNull: true,
       },
       weight: {
         type: Sequelize.DOUBLE,
-        allowNull: false,
+        allowNull: true,
       },
       age: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       active: {
         type: Sequelize.BOOLEAN,
