@@ -17,6 +17,7 @@ import './database';
 // yarn add sequelize-cli -D
 // yarn add pg pg-hstore
 // yarn add bcryptjs
+// yarn add jsonwebtoken
 class App {
   constructor() {
     this.server = express();
