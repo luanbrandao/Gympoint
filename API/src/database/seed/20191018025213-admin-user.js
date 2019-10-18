@@ -1,4 +1,5 @@
 // yarn sequelize seed:generate --name admin-user
+// yarn sequelize db:seed:all
 // const bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
         {
           name: 'Administrador',
           email: 'admin@gympoint.com',
-          telefone: '123123',
+          phone: '123123',
           password_hash: '123123',
           provider: true,
           created_at: new Date(),
