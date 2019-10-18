@@ -1,8 +1,22 @@
 import Student from "../models/Student";
+import * as Yup from 'yup';
 
 class StudentController {
 
   async store(req,res) {
+
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+    const schema = Yup.object().shape({
+      name: Yup.string(),
+      email: Yup.string().email(),
+      // valida o numero de telefone
+      phone: Yup.string().matches(phoneRegExp ,  'Phone number is not valid')
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
 
   const studentExists = await Student.findOne({ where: { email: req.body.email } });
 
