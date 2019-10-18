@@ -28,8 +28,8 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: true,
       },
-      age: {
-        type: Sequelize.INTEGER,
+      date_birth: {
+        type: Sequelize.DATE,
         allowNull: true,
       },
       active: {

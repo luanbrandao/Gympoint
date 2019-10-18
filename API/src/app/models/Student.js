@@ -11,7 +11,7 @@ class Student extends Model {
         phone: Sequelize.STRING,
         height: Sequelize.DOUBLE,
         weight: Sequelize.DOUBLE,
-        age: Sequelize.INTEGER,
+        date_birth: Sequelize.DATE,
         active: Sequelize.BOOLEAN,
       },
       {
