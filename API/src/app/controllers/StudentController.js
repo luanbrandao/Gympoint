@@ -1,11 +1,11 @@
 import Student from "../models/Student";
 import * as Yup from 'yup';
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
 class StudentController {
 
   async store(req,res) {
 
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
     const schema = Yup.object().shape({
       name: Yup.string(),
       email: Yup.string().email(),
@@ -31,11 +31,22 @@ class StudentController {
 
   async update(req,res) {
 
-    const { id , email } = req.body;
+    const schema = Yup.object().shape({
+      id: Yup.number()
+      .required()
+      .positive()
+      .integer(),
+      email: Yup.string().email(),
+      // valida o numero de telefone
+      phone: Yup.string().matches(phoneRegExp ,  'Phone number is not valid')
+    });
 
-    if (!id) {
-      return res.status(401).json({ error: 'Id required' });
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails id' });
     }
+
+
+    const { id , email } = req.body;
 
     const student = await Student.findByPk(id);
 
