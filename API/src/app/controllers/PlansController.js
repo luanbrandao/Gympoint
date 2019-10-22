@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import Plans from '../models/Plans';
-import Student from '../models/Student';
 
 class PlansController {
   async store(req, res) {
@@ -17,6 +16,11 @@ class PlansController {
     const { title, duration, price } = await Plans.create(req.body);
 
     return res.json({ title, duration, price });
+  }
+
+  async index(req, res) {
+    const plans = await Plans.findAll();
+    return res.json(plans);
   }
 }
 
