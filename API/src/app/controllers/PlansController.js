@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import Plans from '../models/Plans';
+import Plan from '../models/Plan';
 
 class PlansController {
   async store(req, res) {
@@ -13,13 +13,13 @@ class PlansController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { title, duration, price } = await Plans.create(req.body);
+    const { title, duration, price } = await Plan.create(req.body);
 
     return res.json({ title, duration, price });
   }
 
   async index(req, res) {
-    const plans = await Plans.findAll();
+    const plans = await Plan.findAll();
     return res.json(plans);
   }
 
@@ -34,7 +34,7 @@ class PlansController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const plant = await Plans.findByPk(req.params.planId);
+    const plant = await Plan.findByPk(req.params.planId);
 
     if (!plant) {
       return res.status(401).json({ error: 'Plan does not exist!' });
@@ -46,7 +46,7 @@ class PlansController {
   }
 
   async delete(req, res) {
-    const plant = await Plans.findByPk(req.params.planId);
+    const plant = await Plan.findByPk(req.params.planId);
 
     if (!plant) {
       return res.status(401).json({ error: 'Plan does not exist!' });
