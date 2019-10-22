@@ -5,6 +5,7 @@ import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import authMiddleware from './app/middlewares/auth';
 import StudentController from './app/controllers/StudentController';
+import PlansController from './app/controllers/PlansController';
 
 const routes = new Router();
 
@@ -31,5 +32,7 @@ routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 routes.post('/students', StudentController.store);
 routes.put('/students', StudentController.update);
+
+routes.post('/plans', PlansController.store);
 
 export default routes;
