@@ -22,6 +22,28 @@ class PlansController {
     const plans = await Plans.findAll();
     return res.json(plans);
   }
+
+  async update(req, res) {
+    const schema = Yup.object().shape({
+      title: Yup.string(),
+      duration: Yup.number(),
+      price: Yup.number(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
+    const plant = await Plans.findByPk(req.params.planId);
+
+    if (!plant) {
+      return res.status(401).json({ error: 'Plan does not exist!' });
+    }
+
+    const { title, duration, price } = await plant.update(req.body);
+
+    return res.json({ title, duration, price });
+  }
 }
 
 export default new PlansController();
