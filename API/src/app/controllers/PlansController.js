@@ -44,6 +44,20 @@ class PlansController {
 
     return res.json({ title, duration, price });
   }
+
+  async delete(req, res) {
+    const plant = await Plans.findByPk(req.params.planId);
+
+    if (!plant) {
+      return res.status(401).json({ error: 'Plan does not exist!' });
+    }
+
+    await plant.destroy({
+      where: { id: req.params.planId },
+    });
+
+    return res.status(200).json(plant);
+  }
 }
 
 export default new PlansController();
