@@ -20,6 +20,11 @@ import './database';
 // yarn add jsonwebtoken
 // validação de form
 // yarn add yup
+
+// enviode email
+// yarn add nodemailer
+// templat do email
+// yarn  add express-handlebars nodemailer-express-handlebars
 class App {
   constructor() {
     this.server = express();

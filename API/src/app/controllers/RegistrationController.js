@@ -4,6 +4,7 @@ import { startOfHour, parseISO, isPast, addMonths, format } from 'date-fns';
 import Registration from '../models/Registration';
 import Student from '../models/Student';
 import Plan from '../models/Plan';
+import Mail from '../../lib/Mail';
 
 class RegistrationController {
   async store(req, res) {
@@ -50,6 +51,19 @@ class RegistrationController {
       price,
     });
 
+    await Mail.sendMail({
+      to: `${student.name} <${student.email}>`,
+      subject: `Matricula realizada com sucesso!`,
+      text: `
+      Matrcula realizada com sucesso!
+      Data de início informada: ${start_date}.
+      Data de término calculada: ${end_date}.
+      Plano selecionado: ${plan.title}
+      Preço calculado: R$${price}.
+      `,
+    });
+
+    // return res.json(student);
     return res.json({
       student_id,
       plan_id,
