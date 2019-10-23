@@ -6,6 +6,7 @@ import SessionController from './app/controllers/SessionController';
 import authMiddleware from './app/middlewares/auth';
 import StudentController from './app/controllers/StudentController';
 import PlansController from './app/controllers/PlansController';
+import RegistrationController from './app/controllers/RegistrationController';
 
 const routes = new Router();
 
@@ -37,5 +38,7 @@ routes.post('/plans', PlansController.store);
 routes.get('/plans', PlansController.index);
 routes.put('/plans/:planId', PlansController.update);
 routes.delete('/plans/:planId', PlansController.delete);
+
+routes.post('/registration', RegistrationController.store);
 
 export default routes;

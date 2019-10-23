@@ -9,17 +9,17 @@ module.exports = {
       },
       student_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id' },
+        references: { model: 'students', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: true,
+        allowNull: false,
       },
       plan_id: {
         type: Sequelize.INTEGER,
         references: { model: 'plans', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: true,
+        allowNull: false,
       },
       start_date: {
         type: Sequelize.DATE,
@@ -27,11 +27,11 @@ module.exports = {
       },
       end_date: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
       },
       price: {
         type: Sequelize.DOUBLE,
-        allowNull: false,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

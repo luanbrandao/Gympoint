@@ -7,6 +7,7 @@ class Student extends Model {
         // os dados que podem ser enviados
         // o model não precisa ter os mesmos campos do db
         name: Sequelize.STRING,
+
         email: Sequelize.STRING,
         phone: Sequelize.STRING,
         height: Sequelize.DOUBLE,
@@ -18,6 +19,7 @@ class Student extends Model {
         sequelize,
       }
     );
+    return this;
   }
 }
 
