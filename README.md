@@ -11,9 +11,11 @@ os alunos podem ver os planos da academia e após a escolha de um se matricular 
 além de marcarem pedidos de auxilio com os instrutores
 
 ## :wrench: Tecnologias
-:wrench: Node
-:wrench: React
-:wrench: React Native
+:red_circle: Node
+
+:red_circle: React
+
+:red_circle: React Native
 
 
 ## 🗒️ Licença
