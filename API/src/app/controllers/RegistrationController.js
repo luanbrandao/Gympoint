@@ -11,17 +11,17 @@ class RegistrationController {
     const { page = 1 } = req.query;
 
     const registration = await Registration.findAll({
-      attributes: [
-        'id',
-        'student_id',
-        'start_date',
-        'end_date',
-        'plan_id',
-        'price',
-      ],
+      attributes: ['id', 'start_date', 'end_date', 'plan_id', 'price'],
       order: [['id', 'DESC']],
       limit: 20,
       offset: (page - 1) * 20,
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name'],
+        },
+      ],
     });
 
     return res.json(registration);
