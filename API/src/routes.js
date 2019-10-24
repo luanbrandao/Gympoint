@@ -4,6 +4,7 @@ import { Router } from 'express';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import authMiddleware from './app/middlewares/auth';
+import isAdminMiddleware from './app/middlewares/admin';
 import StudentController from './app/controllers/StudentController';
 import PlansController from './app/controllers/PlansController';
 import RegistrationController from './app/controllers/RegistrationController';
@@ -39,9 +40,17 @@ routes.get('/plans', PlansController.index);
 routes.put('/plans/:planId', PlansController.update);
 routes.delete('/plans/:planId', PlansController.delete);
 
-routes.post('/registrations', RegistrationController.store);
-routes.get('/registrations', RegistrationController.index);
-routes.delete('/registrations/:registrationId', RegistrationController.delete);
-routes.put('/registrations/:registrationId', RegistrationController.update);
+routes.post('/registrations', isAdminMiddleware, RegistrationController.store);
+routes.get('/registrations', isAdminMiddleware, RegistrationController.index);
+routes.delete(
+  '/registrations/:registrationId',
+  isAdminMiddleware,
+  RegistrationController.delete
+);
+routes.put(
+  '/registrations/:registrationId',
+  isAdminMiddleware,
+  RegistrationController.update
+);
 
 export default routes;
