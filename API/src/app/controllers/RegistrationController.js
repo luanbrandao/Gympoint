@@ -85,6 +85,20 @@ class RegistrationController {
       price,
     });
   }
+
+  async delete(req, res) {
+    const { registrationId } = req.params;
+    const registration = await Registration.findByPk(registrationId);
+
+    if (!registration) {
+      return res.status(401).json({ error: 'Registration not exist!' });
+    }
+    await registration.destroy({
+      where: { id: req.params.planId },
+    });
+
+    return res.status(200).json(registration);
+  }
 }
 
 export default new RegistrationController();
