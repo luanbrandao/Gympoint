@@ -7,6 +7,19 @@ import Plan from '../models/Plan';
 import Mail from '../../lib/Mail';
 
 class RegistrationController {
+  async index(req, res) {
+    const { page = 1 } = req.query;
+
+    const registration = await Registration.findAll({
+      attributes: ['id', 'start_date', 'end_date', 'price'],
+      order: [['id', 'DESC']],
+      limit: 20,
+      offset: (page - 1) * 20,
+    });
+
+    return res.json(registration);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       student_id: Yup.number().required(),

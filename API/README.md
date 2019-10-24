@@ -1,5 +1,5 @@
 <div align="center">
-    <img width="200px" src="./icon.png">
+    <img width="200px" src="../icon.png">
     <h1 align="center">
         Aplicação Gympoint API
     </h1>
