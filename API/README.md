@@ -13,13 +13,16 @@
 
 ## :wrench: Ferramentas
 :large_orange_diamond: Sucrase
+
 :large_orange_diamond: Nodemon
+
 :large_orange_diamond: ESLint
+
 :large_orange_diamond: Prettier
+
 :large_orange_diamond: EditorConfig;
+
 :large_orange_diamond: Sequelize
-
-
 ## Banco Dedos
 :paperclip: PostgreSQL
 
