@@ -13,6 +13,7 @@
 
 ## :ballot_box_with_check: Funcionalidades desenvolvidas até o momento
 :heavy_check_mark: Cadastro de usuários
+
 :heavy_check_mark: Autenticação de usuários
 :heavy_check_mark: Envio de Email
 :heavy_check_mark: Cadastro de alunos
