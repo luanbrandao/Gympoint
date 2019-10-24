@@ -11,7 +11,14 @@ class RegistrationController {
     const { page = 1 } = req.query;
 
     const registration = await Registration.findAll({
-      attributes: ['id', 'start_date', 'end_date', 'price'],
+      attributes: [
+        'id',
+        'student_id',
+        'start_date',
+        'end_date',
+        'plan_id',
+        'price',
+      ],
       order: [['id', 'DESC']],
       limit: 20,
       offset: (page - 1) * 20,
@@ -84,6 +91,59 @@ class RegistrationController {
       end_date,
       price,
     });
+  }
+
+  async update(req, res) {
+    const { registrationId } = req.params;
+    const registration = await Registration.findByPk(registrationId);
+
+    if (!registration) {
+      return res.status(401).json({ error: 'Registration not exist!' });
+    }
+
+    const student = await Student.findByPk(registration.student_id);
+
+    const schema = Yup.object().shape({
+      plan_id: Yup.number().required(),
+      start_date: Yup.date().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
+    const { plan_id, start_date } = req.body;
+
+    const plan = await Plan.findByPk(plan_id);
+    if (!plan) {
+      return res.status(401).json({ error: 'Plan not exist!' });
+    }
+
+    const price = plan.price * plan.duration;
+
+    const hourStart = startOfHour(parseISO(start_date));
+
+    if (isPast(hourStart, new Date())) {
+      return res.status(400).json({ error: 'Past date are not permitted' });
+    }
+    const date = format(parseISO(start_date), 'yyyy/MM/dd').split('/');
+    const end_date = addMonths(new Date(date), plan.duration);
+
+    await registration.update({ plan_id, price, start_date, end_date });
+
+    await Mail.sendMail({
+      to: `${student.name} <${student.email}>`,
+      subject: `Matricula atualizada!`,
+      text: `
+      Verifique os novos valores e datas!
+      Data de início informada: ${start_date}.
+      Data de término calculada: ${end_date}.
+      Plano selecionado: ${plan.title}
+      Preço calculado: R$${price}.
+      `,
+    });
+
+    return res.json({ plan_id, start_date, end_date, price });
   }
 
   async delete(req, res) {
