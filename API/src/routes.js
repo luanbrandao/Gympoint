@@ -8,6 +8,7 @@ import isAdminMiddleware from './app/middlewares/admin';
 import StudentController from './app/controllers/StudentController';
 import PlansController from './app/controllers/PlansController';
 import RegistrationController from './app/controllers/RegistrationController';
+import CheckinsController from './app/controllers/CheckinsController';
 
 const routes = new Router();
 
@@ -52,5 +53,7 @@ routes.put(
   isAdminMiddleware,
   RegistrationController.update
 );
+
+routes.post('/students/:student_id/checkins', CheckinsController.store);
 
 export default routes;
