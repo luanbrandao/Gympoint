@@ -1,5 +1,7 @@
 import * as Yup from 'yup';
+import { subDays, startOfDay, endOfDay } from 'date-fns';
 
+import { Op } from 'sequelize';
 import Student from '../models/Student';
 import Checkin from '../models/Checkin';
 
@@ -19,6 +21,25 @@ class CheckinsController {
 
     if (!student) {
       return res.status(401).json({ error: 'Student not exist!' });
+    }
+
+    const date = new Date();
+    const endDate = subDays(date, 7);
+
+    const checkins = await Checkin.findAll({
+      where: {
+        student_id,
+        createdAt: {
+          [Op.between]: [endDate, date],
+          // [Op.between]: [date, endDate],
+        },
+      },
+    });
+
+    if (checkins.length > 4) {
+      return res
+        .status(401)
+        .json({ error: 'Have you done 7 checkins this week!' });
     }
 
     const checkin = await Checkin.create({ student_id });
