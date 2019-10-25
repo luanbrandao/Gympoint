@@ -55,5 +55,6 @@ routes.put(
 );
 
 routes.post('/students/:student_id/checkins', CheckinsController.store);
+routes.get('/students/:student_id', CheckinsController.index);
 
 export default routes;
