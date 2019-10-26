@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import Student from '../models/Student';
 import HelpOrder from '../models/HelpOrder';
+import Mail from '../../lib/Mail';
 
 class UnansweredHelpOrders {
   async index(req, res) {
@@ -25,6 +26,47 @@ class UnansweredHelpOrders {
     });
 
     return res.json(help_orders);
+  }
+
+  async store(req, res) {
+    const { help_orders_id } = req.params;
+
+    const help_order = await HelpOrder.findByPk(help_orders_id);
+
+    if (!help_order) {
+      return res.status(401).json({ error: 'Help orders not exist!' });
+    }
+
+    const schema = Yup.object({
+      answer: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
+    const date = new Date();
+
+    const answer = await help_order.update({
+      id: help_orders_id,
+      answer: req.body.answer,
+      answer_at: date,
+    });
+
+    const student = await Student.findByPk(help_order.student_id);
+
+    await Mail.sendMail({
+      to: `${student.name} <${student.email}>`,
+      subject: `A academia respondeu sua pergunta!`,
+      text: `
+
+      Resposta:: ${answer.answer}.
+      Data da responta: ${answer.answer_at}.
+
+      `,
+    });
+
+    return res.json(answer);
   }
 }
 export default new UnansweredHelpOrders();
