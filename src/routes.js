@@ -38,10 +38,10 @@ routes.put('/users', UserController.update);
 routes.post('/students', StudentController.store);
 routes.put('/students', StudentController.update);
 
-routes.post('/plans', PlansController.store);
-routes.get('/plans', PlansController.index);
-routes.put('/plans/:planId', PlansController.update);
-routes.delete('/plans/:planId', PlansController.delete);
+routes.post('/plans', isAdminMiddleware, PlansController.store);
+routes.get('/plans', isAdminMiddleware, PlansController.index);
+routes.put('/plans/:planId', isAdminMiddleware, PlansController.update);
+routes.delete('/plans/:planId', isAdminMiddleware, PlansController.delete);
 
 routes.post('/registrations', isAdminMiddleware, RegistrationController.store);
 routes.get('/registrations', isAdminMiddleware, RegistrationController.index);
