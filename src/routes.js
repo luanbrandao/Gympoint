@@ -9,6 +9,7 @@ import StudentController from './app/controllers/StudentController';
 import PlansController from './app/controllers/PlansController';
 import RegistrationController from './app/controllers/RegistrationController';
 import CheckinsController from './app/controllers/CheckinsController';
+import HelpOrdersController from './app/controllers/HelpOrdersController';
 
 const routes = new Router();
 
@@ -56,5 +57,6 @@ routes.put(
 
 routes.post('/students/:student_id/checkins', CheckinsController.store);
 routes.get('/students/:student_id/checkins', CheckinsController.index);
+routes.get('/students/:student_id/help-orders', HelpOrdersController.index);
 
 export default routes;
