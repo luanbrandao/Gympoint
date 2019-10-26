@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { subDays, startOfDay, endOfDay } from 'date-fns';
+import { subDays } from 'date-fns';
 
 import { Op } from 'sequelize';
 import Student from '../models/Student';
