@@ -10,6 +10,7 @@ import PlansController from './app/controllers/PlansController';
 import RegistrationController from './app/controllers/RegistrationController';
 import CheckinsController from './app/controllers/CheckinsController';
 import HelpOrdersController from './app/controllers/HelpOrdersController';
+import UnansweredHelpOrders from './app/controllers/UnansweredHelpOrders';
 
 const routes = new Router();
 
@@ -58,6 +59,6 @@ routes.put(
 routes.post('/students/:student_id/checkins', CheckinsController.store);
 routes.get('/students/:student_id/checkins', CheckinsController.index);
 routes.get('/students/:student_id/help-orders', HelpOrdersController.index);
-routes.post('/students/:student_id/help-orders', HelpOrdersController.store);
+routes.get('/students/:student_id/unanswered', UnansweredHelpOrders.index);
 
 export default routes;
