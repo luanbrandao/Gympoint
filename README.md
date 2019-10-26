@@ -1,21 +1,41 @@
 <div align="center">
-    <img width="200px" src="./icon.png">
+    <img width="200px" src="../icon.png">
     <h1 align="center">
-        Aplicação Gympoint
+        Aplicação Gympoint API
     </h1>
 </div>
 
-# Gympoint
-Aplicação para academias, onde os administradores(instrutores) podem cadastrar seus alunos, 
-os alunos podem ver os planos da academia e após a escolha de um se matricular nela,
-além de marcarem pedidos de auxilio com os instrutores
+# Gympoint API
+
 
 ## :wrench: Tecnologias
 :red_circle: Node
 
-:red_circle: React
+## :wrench: Ferramentas
+:large_orange_diamond: Sucrase
 
-:red_circle: React Native
+:large_orange_diamond: Nodemon
+
+:large_orange_diamond: ESLint
+
+:large_orange_diamond: Prettier
+
+:large_orange_diamond: EditorConfig;
+
+:large_orange_diamond: Sequelize
+## Banco Dedos
+:paperclip: PostgreSQL
+
+## :ballot_box_with_check: Funcionalidades desenvolvidas até o momento
+:heavy_check_mark: Cadastro de usuários
+
+:heavy_check_mark: Autenticação de usuários
+
+:heavy_check_mark: Envio de Email
+
+:heavy_check_mark: Cadastro de alunos
+
+:heavy_check_mark: Cadastro de planos
 
 
 ## 🗒️ Licença
