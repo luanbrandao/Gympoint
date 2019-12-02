@@ -1,20 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Form, Input } from '@rocketseat/unform';
 import logo from '~/assets/logo.png';
-// import { Container } from './styles';
 
 export default function SingUp() {
+  function handleSubmit(data) {
+    console.tron.log(data);
+  }
   return (
     <>
-      <img src={logo} alt="Gympoint" />
-      <form>
-        <input name="name" type="text" placeholder="Nome Completo" />
-        <input type="email" placeholder="Seu e-mail" />
-        <input type="password" placeholder="Seu senha secreta" />
+      <img src={logo} alt="GoBarber" />
+
+      <Form onSubmit={handleSubmit}>
+        <Input name="name" placeholder="Nome Completo" />
+        <Input name="email" type="email" placeholder="Seu e-mail" />
+        <Input
+          name="password"
+          type="password"
+          placeholder="Seu senha secreta"
+        />
 
         <button type="submit">Criar Conta</button>
-        <Link to="/">Já tenho login</Link>
-      </form>
+        <Link to="/">já tenho login</Link>
+      </Form>
     </>
   );
 }
