@@ -4,6 +4,22 @@ import Student from '../models/Student';
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 class StudentController {
+  async index(req, res) {
+    const { name } = req.params;
+    // const { name } = req.body;
+    let studants;
+
+    if (name) {
+      studants = await Student.findOne({
+        where: { name },
+      });
+    } else {
+      studants = await Student.findAll();
+    }
+
+    return res.json({ studants });
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string(),
