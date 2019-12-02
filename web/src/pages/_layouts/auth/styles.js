@@ -58,7 +58,7 @@ export const Content = styled.div`
 
     /* /error input */
     span {
-      color: #fb6f91;
+      color: #fff;
       align-self: flex-start;
       margin: 0 0 10px;
       font-weight: bold;
