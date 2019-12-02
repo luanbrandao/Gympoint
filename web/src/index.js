@@ -1,11 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
 // yarn add eslint -D
 // yarn eslint --init
-// yarn eslint --init
-
 // yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint  -D
 // yarn add eslint-plugin-react-hooks -D
 
@@ -41,5 +39,4 @@ import App from "./App";
 // yarn add date-fns@next
 
 // yarn add date-fns-tz
-
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'));
