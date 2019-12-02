@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 import logoBG from '../../../assets/academia.jpg';
+import colors from '~/styles/colors';
 
 export const Wrapper = styled.div`
   height: 100%;
-  /* background: linear-gradient(-90deg, #1e90ff, #00bfff); */
-  background-color: #cccccc; /* Used if the image is unavailable */
   background-image: url(${logoBG});
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -44,7 +43,7 @@ export const Content = styled.div`
     button {
       margin: 5px 0 0;
       height: 44px;
-      background: #e05463;
+      background: ${colors.primary};
       font-weight: bold;
       color: #fff;
       border: 0;
@@ -53,7 +52,7 @@ export const Content = styled.div`
       transition: background 0.2s;
 
       &:hover {
-        background: ${darken(0.03, '#E05463')};
+        background: ${darken(0.03, `${colors.primary}`)};
       }
     }
 
