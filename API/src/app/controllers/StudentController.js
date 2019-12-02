@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import Student from '../models/Student';
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -7,17 +8,17 @@ class StudentController {
   async index(req, res) {
     const { name } = req.params;
     // const { name } = req.body;
-    let studants;
+    let students;
 
     if (name) {
-      studants = await Student.findOne({
-        where: { name },
+      students = await Student.findAll({
+        where: { name: { [Op.iLike]: `%${name}%` } },
       });
     } else {
-      studants = await Student.findAll();
+      students = await Student.findAll();
     }
 
-    return res.json({ studants });
+    return res.json({ students });
   }
 
   async store(req, res) {
