@@ -20,7 +20,7 @@ import App from './App';
 // yarn add styled-components
 // yarn add polished
 
-// alterar os imports usndo ../..
+// alterar os imports usando ../..
 // yarn add customize-cra react-app-rewired -D
 // yarn add babel-plugin-root-import -D
 // yarn add eslint-import-resolver-babel-plugin-root-import -D
