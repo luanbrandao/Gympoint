@@ -13,6 +13,7 @@ import RegistrationController from './app/controllers/RegistrationController';
 import CheckinsController from './app/controllers/CheckinsController';
 import HelpOrdersController from './app/controllers/HelpOrdersController';
 import UnansweredHelpOrders from './app/controllers/UnansweredHelpOrders';
+import FileController from './app/controllers/FileController';
 
 const routes = new Router();
 const upload = multer(muterConfig);
@@ -37,9 +38,10 @@ routes.post('/sessions', SessionController.store);
 // authMiddleware, só pega as rotas depois dele
 routes.use(authMiddleware);
 
-routes.post('/files', upload.single('file'), (req, res) => {
-  return res.json({ ok: true });
-});
+// routes.post('/files', upload.single('file'), (req, res) => {
+//   return res.json({ ok: true });
+// });
+routes.post('/files', upload.single('file'), FileController.store);
 
 routes.put('/users', UserController.update);
 routes.post('/students', StudentController.store);

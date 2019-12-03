@@ -27,6 +27,12 @@ class User extends Model {
     return this;
   }
 
+  // relação de chave estrangeira
+  static associate(models) {
+    // a tabele user tem o id da tabela file
+    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+  }
+
   checkPassword(password) {
     return bcrypt.compare(password, this.password_hash);
   }
