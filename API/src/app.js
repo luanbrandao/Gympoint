@@ -1,6 +1,7 @@
 import express from 'express';
 import rotues from './routes';
 import './database';
+import cors from 'cors';
 // yarn init -y
 // yarn add express
 // para usar import
@@ -25,6 +26,9 @@ import './database';
 // yarn add nodemailer
 // templat do email
 // yarn  add express-handlebars nodemailer-express-handlebars
+
+// yarn add cors
+
 class App {
   constructor() {
     this.server = express();
@@ -34,6 +38,7 @@ class App {
 
   middlewares() {
     this.server.use(express.json());
+    this.server.use(cors());
   }
 
   routes() {
