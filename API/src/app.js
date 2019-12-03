@@ -1,7 +1,7 @@
 import express from 'express';
+import cors from 'cors';
 import rotues from './routes';
 import './database';
-import cors from 'cors';
 // yarn init -y
 // yarn add express
 // para usar import
