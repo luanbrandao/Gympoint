@@ -29,6 +29,9 @@ import './database';
 
 // yarn add cors
 
+// trabalha com o tipo multipart/form-data
+// yarn add multer
+
 class App {
   constructor() {
     this.server = express();

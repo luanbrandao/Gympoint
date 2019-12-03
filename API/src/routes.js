@@ -1,6 +1,8 @@
 import { Router } from 'express';
 // import User from './app/models/User';
 // import Student from './app/models/Student';
+import multer from 'multer';
+import muterConfig from './config/multer';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import authMiddleware from './app/middlewares/auth';
@@ -13,7 +15,7 @@ import HelpOrdersController from './app/controllers/HelpOrdersController';
 import UnansweredHelpOrders from './app/controllers/UnansweredHelpOrders';
 
 const routes = new Router();
-
+const upload = multer(muterConfig);
 // routes.get('/', (req, res) => res.json({ message: 'hello Rocktseat!' }));
 
 // routes.get('/students', async (req, res) => {
@@ -34,6 +36,11 @@ routes.post('/sessions', SessionController.store);
 
 // authMiddleware, só pega as rotas depois dele
 routes.use(authMiddleware);
+
+routes.post('/files', upload.single('file'), (req, res) => {
+  return res.json({ ok: true });
+});
+
 routes.put('/users', UserController.update);
 routes.post('/students', StudentController.store);
 routes.put('/students', StudentController.update);
