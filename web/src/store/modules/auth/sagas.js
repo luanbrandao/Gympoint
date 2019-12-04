@@ -20,7 +20,8 @@ export function* signIn({ payload }) {
       return;
     }
 
-    console.tron.log('res => ', response.data);
+    // seta o token em todas as requisições
+    api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
     history.push('/dashboard');
@@ -48,7 +49,20 @@ export function* signUp({ payload }) {
   }
 }
 
+// pega o token do storage do persist
+export function setToken({ payload }) {
+  if (!payload) return;
+
+  console.tron.log('setToken => ', payload);
+  const { token } = payload.auth;
+  if (token) {
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+  }
+}
+
 export default all([
+  // persist/REHYDRATE, executa toda vez quando inicia a aplicação
+  takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
 ]);
