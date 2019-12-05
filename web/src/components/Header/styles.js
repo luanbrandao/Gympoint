@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import colors from '~/styles/colors';
 // http://avatars.adorable.io/
 
 export const Container = styled.div`
   background: #fff;
   padding: 0 30px;
+  border-bottom: 1px solid #eee;
 `;
 export const Content = styled.div`
   height: 64px;
@@ -27,7 +29,8 @@ export const Content = styled.div`
 
     a {
       font-weight: bold;
-      color: #7159c1;
+      margin-left: 10px;
+      color: black;
     }
   }
 
@@ -38,9 +41,10 @@ export const Content = styled.div`
 `;
 export const Profile = styled.div`
   display: flex;
-  margin-left: 20px;
-  padding-left: 20px;
+  margin: 0 20px 0 20px;
+  padding: 0 20px 0 20px;
   border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
 
   div {
     text-align: right;
@@ -62,5 +66,14 @@ export const Profile = styled.div`
     width: 32px;
     height: 32px;
     border-radius: 50%;
+  }
+`;
+
+export const Sair = styled.div`
+  button {
+    padding: 10px;
+    color: ${colors.primary};
+    background: none;
+    border: none;
   }
 `;

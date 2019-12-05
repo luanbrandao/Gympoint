@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import logo from '~/assets/logo.png';
-import { Container, Content, Profile } from './styles';
+import { Container, Content, Profile, Sair } from './styles';
 
 export default function Header() {
   const profile = useSelector(state => state.user.profile);
@@ -12,7 +12,10 @@ export default function Header() {
       <Content>
         <nav>
           <img src={logo} alt="GymPoint" />
-          <Link to="/dashboard">DASHBOARD</Link>
+          <Link to="/dashboard">ALUNOS</Link>
+          <Link to="/dashboard">PLANOS</Link>
+          <Link to="/dashboard">MATRÍCULAS</Link>
+          <Link to="/dashboard">PEDIDOS DE AUXÍLIO</Link>
         </nav>
 
         <aside>
@@ -30,6 +33,12 @@ export default function Header() {
               alt={profile.name}
             />
           </Profile>
+
+          <Sair>
+            {/* <strong>Sair</strong> */}
+            <button type="button">Sair</button>
+            {/* <Link to="/profile">Sair</Link> */}
+          </Sair>
         </aside>
       </Content>
     </Container>
