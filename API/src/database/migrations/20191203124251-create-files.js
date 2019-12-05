@@ -2,7 +2,6 @@
 // yarn sequelize db:migrate
 // yarn sequelize db:migrate:undo
 // yarn sequelize  db:migrate:undo:all
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('files', {
