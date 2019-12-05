@@ -5,12 +5,13 @@ import { updateProfileSuccess, updateProfileFailute } from './actions';
 
 export function* updateProfile({ payload }) {
   try {
-    const { name, email, phone, ...rest } = payload.data;
+    const { name, email, phone, avatar_id, ...rest } = payload.data;
 
     const profile = {
       name,
       email,
       phone,
+      avatar_id,
       ...(rest.oldPassword ? rest : {}),
     };
     console.tron.log('date profile => ', profile);
