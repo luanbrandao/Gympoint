@@ -16,8 +16,11 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 315px;
+  max-width: 400px;
   text-align: center;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
 
   form {
     display: flex;
@@ -66,7 +69,7 @@ export const Content = styled.div`
 
     /* o Link do react-router-dom vira uma âncora */
     a {
-      color: #fff;
+      color: ${colors.primary};
       margin-top: 15px;
       font-size: 16px;
       opacity: 0.8;
