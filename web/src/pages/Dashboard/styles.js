@@ -84,12 +84,13 @@ export const Main = styled.div`
 export const Table = styled.table`
   width: 100%;
   margin: 20px;
-  border-collapse: collapse;
+
   /* width: 100%; */
   thead {
   }
 
   tr {
+    border-collapse: collapse;
     border-bottom: 1px solid black;
   }
   td.end {

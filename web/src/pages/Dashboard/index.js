@@ -1,5 +1,5 @@
-import React from 'react';
 import { MdAdd, MdSearch } from 'react-icons/md';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Header,
@@ -11,7 +11,25 @@ import {
   Delete,
 } from './styles';
 
+import api from '~/services/api';
+
 export default function Dashboard() {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    async function loadStudents() {
+      const response = await api.get('students');
+
+      // executa a formatação assim que pega os dados da api
+      // para executar apenas uma unica vez
+      const { data } = response;
+
+      setStudents(data.students);
+    }
+
+    loadStudents();
+  }, []);
+
   return (
     <Container>
       <Header>
@@ -47,31 +65,19 @@ export default function Dashboard() {
           </thead>
 
           <tbody>
-            <tr>
-              <td>Luan Brandao</td>
-              <td>luanbrandao4@gmail.com</td>
-              <td>50</td>
-              <td>editar</td>
-              <td>apagar</td>
-            </tr>
-            <tr>
-              <td>Luan Brandao</td>
-              <td>luanbrandao4@gmail.com</td>
-              <td>50</td>
-              <td>editar</td>
-              <td>apagar</td>
-            </tr>
-            <tr>
-              <td>Luan Brandao</td>
-              <td>luanbrandao4@gmail.com</td>
-              <td>50</td>
-              <td>
-                <Edite type="button">editar</Edite>
-              </td>
-              <td>
-                <Delete type="button">apagar</Delete>
-              </td>
-            </tr>
+            {students.map(student => (
+              <tr key={student.email}>
+                <td>{student.name}</td>
+                <td>{student.email}</td>
+                <td>{student.phone}</td>
+                <td>
+                  <Edite type="button">editar</Edite>
+                </td>
+                <td>
+                  <Delete type="button">apagar</Delete>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </Main>
