@@ -15,20 +15,38 @@ import api from '~/services/api';
 
 export default function Dashboard() {
   const [students, setStudents] = useState([]);
+  const [nameStudent, setNameStudent] = useState('');
 
   useEffect(() => {
     async function loadStudents() {
       const response = await api.get('students');
-
       // executa a formatação assim que pega os dados da api
       // para executar apenas uma unica vez
       const { data } = response;
-
       setStudents(data.students);
     }
 
     loadStudents();
   }, []);
+
+  function handleInputChange(e) {
+    console.tron.log('e.target.value => ', e.target.value);
+    setNameStudent(e.target.value);
+  }
+
+  async function getUserByName() {
+    console.tron.log('nameStudent => ', nameStudent);
+    const response = await api.get(`students/${nameStudent}`);
+    console.tron.log('get user ny name => ', response);
+    const { data } = response;
+    setStudents(data.students);
+  }
+
+  function handleKeyUp(event) {
+    if (event.keyCode === 13) {
+      getUserByName();
+    }
+  }
 
   return (
     <Container>
@@ -46,8 +64,15 @@ export default function Dashboard() {
           </button>
 
           <Search>
-            <MdSearch size={20} color="##c3c3c3" />
-            <input type="text" placeholder="Buscar aluno" />
+            <button type="button" onClick={getUserByName}>
+              <MdSearch size={20} color="#c3c3c3" />
+            </button>
+            <input
+              onKeyUp={handleKeyUp}
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Buscar aluno"
+            />
           </Search>
         </Options>
       </Header>
