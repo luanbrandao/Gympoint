@@ -67,7 +67,6 @@ export const Options = styled.div`
 `;
 
 export const Search = styled.div`
-  margin-left: 10px;
   padding: 10px;
   border-radius: 4px;
   height: 30px;
@@ -75,6 +74,11 @@ export const Search = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  button {
+    background-color: #fff;
+    margin: 0;
+  }
 `;
 
 export const Main = styled.div`

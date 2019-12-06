@@ -42,6 +42,7 @@ export default function Dashboard() {
     setStudents(data.students);
   }
 
+  // se o usuário click no enter tbm faz a busca pelo nome
   function handleKeyUp(event) {
     if (event.keyCode === 13) {
       getUserByName();
