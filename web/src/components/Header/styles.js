@@ -6,6 +6,7 @@ export const Container = styled.div`
   background: #fff;
   padding: 0 30px;
   border-bottom: 1px solid #eee;
+  box-shadow: 1px 1px #888888;
 `;
 export const Content = styled.div`
   height: 64px;
