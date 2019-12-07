@@ -7,6 +7,7 @@ import SingUp from '../pages/SingUp';
 
 import Dashboard_Student from '../pages/Dashboard_Student';
 import Profile from '../pages/Profile';
+import Dashboard_Plans from '~/pages/Dashboard_Plans';
 
 export default function Routes() {
   return (
@@ -18,6 +19,7 @@ export default function Routes() {
         component={Dashboard_Student}
         isPrivate
       />
+      <Route path="/dashboard_plans" component={Dashboard_Plans} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
       {/* <Route path="/" component={() => <h1>404</h1>} />s */}
     </Switch>

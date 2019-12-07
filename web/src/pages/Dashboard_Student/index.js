@@ -1,4 +1,4 @@
-import { MdAdd, MdSearch } from 'react-icons/md';
+import { MdAdd, MdSearch, MdEdit, MdDelete } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
 import {
   Container,
@@ -85,8 +85,8 @@ export default function Dashboard_Student() {
               <th>Nome</th>
               <th>E-MAIL</th>
               <th>IDADE</th>
-              <th />
-              <th />
+              {/* <th />
+              <th /> */}
             </tr>
           </thead>
 
@@ -97,10 +97,16 @@ export default function Dashboard_Student() {
                 <td>{student.email}</td>
                 <td>{student.phone}</td>
                 <td>
-                  <Edite type="button">editar</Edite>
+                  <Edite type="button">
+                    editar
+                    <MdEdit />
+                  </Edite>
                 </td>
                 <td>
-                  <Delete type="button">apagar</Delete>
+                  <Delete type="button">
+                    apagar
+                    <MdDelete />
+                  </Delete>
                 </td>
               </tr>
             ))}

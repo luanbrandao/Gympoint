@@ -19,7 +19,7 @@ export default function Header() {
         <nav>
           <img src={logo} alt="GymPoint" />
           <Link to="/dashboard_student">ALUNOS</Link>
-          <Link to="/dashboard">PLANOS</Link>
+          <Link to="/dashboard_plans">PLANOS</Link>
           <Link to="/dashboard">MATRÍCULAS</Link>
           <Link to="/dashboard">PEDIDOS DE AUXÍLIO</Link>
         </nav>
