@@ -5,7 +5,7 @@ import Route from './Route';
 import SingIn from '../pages/SingIn';
 import SingUp from '../pages/SingUp';
 
-import Dashboard from '../pages/Dashboard';
+import Dashboard_Student from '../pages/Dashboard_Student';
 import Profile from '../pages/Profile';
 
 export default function Routes() {
@@ -13,7 +13,11 @@ export default function Routes() {
     <Switch>
       <Route path="/" exact component={SingIn} />
       <Route path="/register" component={SingUp} />
-      <Route path="/dashboard" component={Dashboard} isPrivate />
+      <Route
+        path="/dashboard_student"
+        component={Dashboard_Student}
+        isPrivate
+      />
       <Route path="/profile" component={Profile} isPrivate />
       {/* <Route path="/" component={() => <h1>404</h1>} />s */}
     </Switch>

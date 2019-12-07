@@ -13,7 +13,7 @@ import {
 
 import api from '~/services/api';
 
-export default function Dashboard() {
+export default function Dashboard_Student() {
   const [students, setStudents] = useState([]);
   const [nameStudent, setNameStudent] = useState('');
 
