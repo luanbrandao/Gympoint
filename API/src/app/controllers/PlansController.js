@@ -20,7 +20,7 @@ class PlansController {
 
   async index(req, res) {
     const plans = await Plan.findAll();
-    return res.json(plans);
+    return res.json({ plans });
   }
 
   async update(req, res) {

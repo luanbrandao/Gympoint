@@ -31,7 +31,7 @@ class RegistrationController {
       ],
     });
 
-    return res.json(registration);
+    return res.json({ registration });
   }
 
   async store(req, res) {

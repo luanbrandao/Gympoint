@@ -12,18 +12,16 @@ import {
 
 import api from '~/services/api';
 
-export default function Dashboard_Plans() {
-  const [plans, setPlans] = useState([]);
+export default function Dashboard_Student() {
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
     async function loadStudents() {
-      const response = await api.get('plans');
+      const response = await api.get('students');
       // executa a formatação assim que pega os dados da api
       // para executar apenas uma unica vez
       const { data } = response;
-      console.tron.log('plans => ', data);
-      // setPlans(data.plans);
-      setPlans(data.plans);
+      setStudents(data.students);
     }
 
     loadStudents();
@@ -33,7 +31,7 @@ export default function Dashboard_Plans() {
     <Container>
       <Header>
         <div>
-          <h1>Gerenciando Planos</h1>
+          <h1>Gerenciando matrículas</h1>
         </div>
 
         <Options>
@@ -50,20 +48,23 @@ export default function Dashboard_Plans() {
         <Table id="customers">
           <thead>
             <tr>
-              <th>Título</th>
-              <th>Duração</th>
-              <th>Valor p/Mês</th>
-              {/* <th />
-              <th /> */}
+              <th>ALUNO</th>
+              <th>PLANO</th>
+              <th>INÍCIO</th>
+              <th>INÍCIO</th>
+              <th>TÉRMINO</th>
+              <th>ATIVO</th>
             </tr>
           </thead>
 
           <tbody>
-            {plans.map(plan => (
-              <tr key={plan.title}>
-                <td>{plan.title}</td>
-                <td>{plan.duration}</td>
-                <td>R$ {plan.price}</td>
+            {students.map(student => (
+              <tr key={student.email}>
+                <td>{student.name}</td>
+                <td>{student.email}</td>
+                <td>{student.phone}</td>
+                <td>{student.phone}</td>
+                <td>{student.phone}</td>
                 <td>
                   <Edite type="button">
                     editar
