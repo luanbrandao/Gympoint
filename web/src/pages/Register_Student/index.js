@@ -9,7 +9,7 @@ import {
   Header,
   Options,
   Main,
-  Info,
+  InputGroup,
   BtnComeBack,
   BtnBtnToSave,
 } from '~/pages/_layouts/register/styles';
@@ -61,14 +61,22 @@ export default function Register_Student() {
 
       <Main>
         <Form schema={schema} onSubmit={handleSubmit}>
-          <Input label="Nome Completo" name="name" type="text" />
+          <Input onFocus label="Nome Completo" name="name" type="text" />
           <Input label="ENDERAÇO DE E-MAIL" name="email" type="email" />
           <Input label="SEU TELEFONE" name="phone" type="text" />
-          <Info>
-            <Input label="IDADE" name="age" type="number" />
-            <Input label="PESO (em kg)" name="weight" type="number" />
-            <Input label="ALTURA" name="height" type="number" />
-          </Info>
+          <InputGroup>
+            <div>
+              <Input label="IDADE" name="age" type="number" />
+            </div>
+
+            <div>
+              <Input label="PESO (em kg)" name="weight" type="number" />
+            </div>
+
+            <div>
+              <Input label="ALTURA" name="height" type="number" />
+            </div>
+          </InputGroup>
           <button type="submit">Salvar</button>
         </Form>
       </Main>

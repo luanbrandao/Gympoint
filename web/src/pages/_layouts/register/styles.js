@@ -9,6 +9,22 @@ export const Container = styled.div`
   margin: 50px auto;
   border-radius: 5px;
   padding: 20px;
+
+  input[type='text'],
+  [type='number'],
+  [type='email'] {
+    border: 1px solid lightblue;
+    border-radius: 4px;
+    /* padding: 20px; */
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+
+  input[type='text']:focus,
+  [type='number']:focus,
+  [type='email']:focus {
+    border: 3px solid black;
+  }
 `;
 
 export const Header = styled.div`
@@ -153,15 +169,17 @@ export const Main = styled.div`
   }
 `;
 
-export const Info = styled.div`
-  /* display: flex; */
+export const InputGroup = styled.div`
   flex: 1;
+  display: flex;
+  div {
+    display: flex;
+    flex-direction: column;
+  }
   label {
     /* display: flex; */
-    /* flex-direction: column; */
   }
   input {
-    width: 20%;
     border: 2px solid red;
   }
 `;
