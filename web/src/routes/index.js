@@ -9,6 +9,7 @@ import Dashboard_Students from '../pages/Dashboard_Students';
 import Profile from '../pages/Profile';
 import Dashboard_Plans from '~/pages/Dashboard_Plans';
 import Dashboard_Registrations from '~/pages/Dashboard_Registrations';
+import Dashboard_Help_Orders from '~/pages/Dashboard_Help_Orders';
 
 export default function Routes() {
   return (
@@ -24,6 +25,11 @@ export default function Routes() {
       <Route
         path="/dashboard_registrations"
         component={Dashboard_Registrations}
+        isPrivate
+      />
+      <Route
+        path="/dashboard_help_orders"
+        component={Dashboard_Help_Orders}
         isPrivate
       />
       <Route path="/profile" component={Profile} isPrivate />
