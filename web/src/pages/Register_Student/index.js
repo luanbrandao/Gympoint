@@ -1,41 +1,69 @@
+import { MdAdd, MdArrowBack } from 'react-icons/md';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
-import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { signInRequest } from '~/store/modules/auth/actions';
-import logo from '~/assets/logo.png';
-import {} from '~/pages/_layouts/resister/styles';
+import { toast } from 'react-toastify';
+import {
+  Container,
+  Header,
+  Options,
+  Main,
+  Info,
+  BtnComeBack,
+  BtnBtnToSave,
+} from '~/pages/_layouts/register/styles';
+
+import api from '~/services/api';
 
 export default function Register_Student() {
-  const dispatch = useDispatch();
-  const loading = useSelector(state => state.auth.loading);
-  const schema = Yup.object().shape({
-    email: Yup.string()
-      .email('Insira um e-mail válido')
-      .required('O e-mail é obrigatório'),
-    password: Yup.string().required('A senha é obrigatório'),
-  });
-
-  function handleSubmit({ email, password }) {
-    console.tron.log('email, password', email, password);
-    dispatch(signInRequest(email, password));
-    // console.tron.log(email, password);
+  async function handleSubmit(data, { resetForm }) {
+    try {
+      await api.post('students', data);
+      toast.success('Cadastro realizado com sucesso!');
+      resetForm();
+    } catch (error) {
+      toast.error('Falha no cadastro, tente novamente');
+    }
   }
 
   return (
-    <>
-      <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name="email" type="email" placeholder="Seu e-mail" />
-        <Input
-          name="password"
-          type="password"
-          placeholder="Seu senha secreta"
-        />
+    <Container>
+      <Header>
+        <div>
+          <h1>Gerencia de alunos</h1>
+        </div>
+        <Options>
+          <BtnComeBack type="button">
+            <div>
+              <MdArrowBack size={20} color="#FFF" />
+              {/* <strong onClick={resisterStudent}>CADASTRAR</strong> */}
+              {/* <strong onClick={resisterStudent}>CADASTRAR</strong> */}
+              <Link to="/dashboard_students">Voltar</Link>
+            </div>
+          </BtnComeBack>
+          <BtnBtnToSave type="button">
+            <div>
+              <MdAdd size={20} color="#FFF" />
+              <strong>Salvar</strong>
+              {/* <Link to="/resister_student">Salvar</Link> */}
+            </div>
+          </BtnBtnToSave>
+        </Options>
+      </Header>
 
-        <button type="submit">{loading ? 'Carregando...' : 'Acessar'}</button>
-        <Link to="/register">Criar conta gratuita</Link>
-      </Form>
-    </>
+      <Main>
+        <Form onSubmit={handleSubmit}>
+          <Input label="Nome Completo" name="name" type="text" />
+          <Input label="ENDERAÇO DE E-MAIL" name="email" type="email" />
+          <Input label="SEU TELEFONE" name="phone" type="text" />
+          <Info>
+            <Input label="IDADE" name="age" type="number" />
+            <Input label="PESO (em kg)" name="weight" type="number" />
+            <Input label="ALTURA" name="height" type="number" />
+          </Info>
+          <button type="submit">Salvar</button>
+        </Form>
+      </Main>
+    </Container>
   );
 }
