@@ -132,7 +132,7 @@ export const Main = styled.div`
 
     /* /error input */
     span {
-      color: #fff;
+      color: #fb6f91;
       align-self: flex-start;
       margin: 0 0 10px;
       font-weight: bold;

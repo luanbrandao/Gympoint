@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 import {
   Container,
   Header,
@@ -12,8 +13,15 @@ import {
   BtnComeBack,
   BtnBtnToSave,
 } from '~/pages/_layouts/register/styles';
-
 import api from '~/services/api';
+
+const schema = Yup.object().shape({
+  name: Yup.string().required('O nome é obrigatório'),
+  email: Yup.string()
+    .email('Insira um e-mail válido')
+    .required('O e-mail é obrigatório'),
+  phone: Yup.string().required('O telefone é obrigatório'),
+});
 
 export default function Register_Student() {
   async function handleSubmit(data, { resetForm }) {
@@ -52,7 +60,7 @@ export default function Register_Student() {
       </Header>
 
       <Main>
-        <Form onSubmit={handleSubmit}>
+        <Form schema={schema} onSubmit={handleSubmit}>
           <Input label="Nome Completo" name="name" type="text" />
           <Input label="ENDERAÇO DE E-MAIL" name="email" type="email" />
           <Input label="SEU TELEFONE" name="phone" type="text" />
