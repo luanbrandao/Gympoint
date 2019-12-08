@@ -8,7 +8,7 @@ import {
   Table,
   Edite,
   Delete,
-} from './styles';
+} from '~/pages/_layouts/dashboard/styles';
 
 import api from '~/services/api';
 

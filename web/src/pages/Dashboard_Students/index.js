@@ -1,5 +1,6 @@
 import { MdAdd, MdSearch, MdEdit, MdDelete } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -9,7 +10,7 @@ import {
   Table,
   Edite,
   Delete,
-} from './styles';
+} from '~/pages/_layouts/dashboard/styles';
 
 import api from '~/services/api';
 
@@ -60,7 +61,9 @@ export default function Dashboard_Students() {
           <button type="button">
             <div>
               <MdAdd size={20} color="#FFF" />
-              <strong>CADASTRAR</strong>
+              {/* <strong onClick={resisterStudent}>CADASTRAR</strong> */}
+              {/* <strong onClick={resisterStudent}>CADASTRAR</strong> */}
+              <Link to="/resister_student">CADASTRAR</Link>
             </div>
           </button>
 

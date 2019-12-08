@@ -1,6 +1,12 @@
 import { MdReplay } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
-import { Container, Header, Main, Table, Delete } from './styles';
+import {
+  Container,
+  Header,
+  Main,
+  Table,
+  Delete,
+} from '~/pages/_layouts/dashboard/styles';
 
 import api from '~/services/api';
 

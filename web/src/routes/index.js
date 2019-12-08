@@ -10,6 +10,7 @@ import Profile from '../pages/Profile';
 import Dashboard_Plans from '~/pages/Dashboard_Plans';
 import Dashboard_Registrations from '~/pages/Dashboard_Registrations';
 import Dashboard_Help_Orders from '~/pages/Dashboard_Help_Orders';
+import Register_Student from '~/pages/Register_Student';
 
 export default function Routes() {
   return (
@@ -32,6 +33,7 @@ export default function Routes() {
         component={Dashboard_Help_Orders}
         isPrivate
       />
+      <Route path="/resister_student" component={Register_Student} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
       {/* <Route path="/" component={() => <h1>404</h1>} />s */}
     </Switch>
