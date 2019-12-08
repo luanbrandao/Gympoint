@@ -11,9 +11,10 @@ import StudentController from './app/controllers/StudentController';
 import PlansController from './app/controllers/PlansController';
 import RegistrationController from './app/controllers/RegistrationController';
 import CheckinsController from './app/controllers/CheckinsController';
-import HelpOrdersController from './app/controllers/HelpOrdersController';
+import HelpOrdersStudentController from './app/controllers/HelpOrdersStudentController';
 import UnansweredHelpOrders from './app/controllers/UnansweredHelpOrders';
 import FileController from './app/controllers/FileController';
+import HelpOrderstController from './app/controllers/HelpOrderstController';
 
 const routes = new Router();
 const upload = multer(muterConfig);
@@ -67,9 +68,13 @@ routes.put(
 
 routes.post('/students/:student_id/checkins', CheckinsController.store);
 routes.get('/students/:student_id/checkins', CheckinsController.index);
-routes.get('/students/:student_id/help-orders', HelpOrdersController.index);
+routes.get(
+  '/students/:student_id/help-orders',
+  HelpOrdersStudentController.index
+);
 routes.get('/students/:student_id/unanswered', UnansweredHelpOrders.index);
 routes.post('/unanswered/:help_orders_id', UnansweredHelpOrders.store);
 routes.get('/students/:name?', StudentController.index);
+routes.get('/help_orders', HelpOrderstController.index);
 
 export default routes;

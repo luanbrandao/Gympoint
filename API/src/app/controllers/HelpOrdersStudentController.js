@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import Student from '../models/Student';
 import HelpOrder from '../models/HelpOrder';
 
-class HelpOrdersController {
+class HelpOrdersStudentController {
   async index(req, res) {
     const { student_id } = req.params;
 
@@ -51,4 +51,4 @@ class HelpOrdersController {
     return res.json(question);
   }
 }
-export default new HelpOrdersController();
+export default new HelpOrdersStudentController();
