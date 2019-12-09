@@ -52,6 +52,7 @@ export default function Dashboard_Students() {
   }
 
   function handleEdit(student) {
+    console.log('studant => ', student);
     history.push('/edit_student', { student });
   }
   return (
@@ -91,6 +92,7 @@ export default function Dashboard_Students() {
             <tr>
               <th>Nome</th>
               <th>E-MAIL</th>
+              <th>Fone</th>
               <th>IDADE</th>
               {/* <th />
               <th /> */}
@@ -103,6 +105,7 @@ export default function Dashboard_Students() {
                 <td>{student.name}</td>
                 <td>{student.email}</td>
                 <td>{student.phone}</td>
+                <td>{student.age}</td>
                 <td>
                   <Edite type="button" onClick={() => handleEdit(student)}>
                     {/* <Link to="/edit_student/1">editar</Link> */}

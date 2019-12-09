@@ -34,6 +34,7 @@ export default function Edit_Student() {
   async function handleSubmit(data) {
     const { id } = student;
     const newData = { ...data, id };
+    // console.log("new date ", newData);
     try {
       await api.put('students', newData);
       toast.success('Aluno atualizado');
@@ -88,17 +89,19 @@ export default function Edit_Student() {
             type="email"
             placeholder="exemplo@gmail.com"
           />
-          <Input
-            label="SEU TELEFONE"
-            name="phone"
-            type="text"
-            placeholder="93 991919191"
-          />
           <InputGroup>
-            <div>
-              <Input label="IDADE" name="age" type="number" />
-            </div>
+            {/* <div>
+              <Input label="Data Nasc." name="date_birth" type="date" />
+            </div> */}
 
+            <div>
+              <Input
+                label="TELEFONE"
+                name="phone"
+                type="text"
+                placeholder="93 991919191"
+              />
+            </div>
             <div>
               <Input label="PESO (em kg)" name="weight" type="number" />
             </div>

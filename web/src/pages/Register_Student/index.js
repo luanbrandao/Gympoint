@@ -21,6 +21,9 @@ const schema = Yup.object().shape({
     .email('Insira um e-mail válido')
     .required('O e-mail é obrigatório'),
   phone: Yup.string().required('O telefone é obrigatório'),
+  date_birth: Yup.string(),
+  weight: Yup.string(),
+  height: Yup.string(),
 });
 
 export default function Register_Student() {
@@ -81,7 +84,7 @@ export default function Register_Student() {
           />
           <InputGroup>
             <div>
-              <Input label="IDADE" name="age" type="number" />
+              <Input label="DATA/NASC" name="date_birth" type="date" />
             </div>
 
             <div>

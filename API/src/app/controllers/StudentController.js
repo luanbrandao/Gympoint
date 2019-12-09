@@ -1,5 +1,7 @@
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
+// import { format } from 'date-fns';
+// import pt from 'date-fns/locale/pt';
 import Student from '../models/Student';
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -41,6 +43,17 @@ class StudentController {
       return res.status(400).json({ error: 'Student already exists.' });
     }
 
+    const data = req.body;
+
+    // o web manda no formato 12/12/1212, converte para 12-12-1212
+    data.date_birth = data.date_birth
+      ? data.date_birth.replace(new RegExp('/', 'g'), '-')
+      : null;
+    // como o web manda tudo como string,
+    // quando mandava a string vazia data erro
+    data.height = data.height ? parseFloat(data.height) : null;
+    data.weight = data.weight ? parseFloat(data.weight) : null;
+
     const {
       name,
       email,
@@ -49,8 +62,9 @@ class StudentController {
       weight,
       date_birth,
       active,
-    } = await Student.create(req.body);
+    } = await Student.create(data);
     return res.json({ name, email, phone, height, weight, date_birth, active });
+    // return res.json(data);
   }
 
   async update(req, res) {
