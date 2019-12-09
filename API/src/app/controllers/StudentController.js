@@ -99,6 +99,17 @@ class StudentController {
       }
     }
 
+    const data = req.body;
+
+    // o web manda no formato 12/12/1212, converte para 12-12-1212
+    data.date_birth = data.date_birth
+      ? data.date_birth.replace(new RegExp('/', 'g'), '-')
+      : null;
+    // como o web manda tudo como string,
+    // quando mandava a string vazia data erro
+    data.height = data.height ? parseFloat(data.height) : null;
+    data.weight = data.weight ? parseFloat(data.weight) : null;
+
     const {
       name,
       phone,
@@ -106,7 +117,8 @@ class StudentController {
       weight,
       date_birth,
       active,
-    } = await student.update(req.body);
+    } = await student.update(data);
+
     return res.json({ name, email, phone, height, weight, date_birth, active });
   }
 }

@@ -22,6 +22,9 @@ const schema = Yup.object().shape({
     .email('Insira um e-mail válido')
     .required('O e-mail é obrigatório'),
   phone: Yup.string().required('O telefone é obrigatório'),
+  date_birth: Yup.string(),
+  weight: Yup.string(),
+  height: Yup.string(),
 });
 
 export default function Edit_Student() {
@@ -34,7 +37,7 @@ export default function Edit_Student() {
   async function handleSubmit(data) {
     const { id } = student;
     const newData = { ...data, id };
-    // console.log("new date ", newData);
+    console.log('new date ', newData);
     try {
       await api.put('students', newData);
       toast.success('Aluno atualizado');
