@@ -101,7 +101,7 @@ export default function Dashboard_Students() {
                 <td>{student.phone}</td>
                 <td>
                   <Edite type="button">
-                    editar
+                    <Link to="/edit_student">editar</Link>
                     <MdEdit />
                   </Edite>
                 </td>

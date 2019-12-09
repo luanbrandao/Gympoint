@@ -6,11 +6,12 @@ import SingIn from '../pages/SingIn';
 import SingUp from '../pages/SingUp';
 
 import Dashboard_Students from '../pages/Dashboard_Students';
+import Edit_Student from '../pages/Edit_Student';
+import Register_Student from '~/pages/Register_Student';
 import Profile from '../pages/Profile';
 import Dashboard_Plans from '~/pages/Dashboard_Plans';
 import Dashboard_Registrations from '~/pages/Dashboard_Registrations';
 import Dashboard_Help_Orders from '~/pages/Dashboard_Help_Orders';
-import Register_Student from '~/pages/Register_Student';
 
 export default function Routes() {
   return (
@@ -22,6 +23,7 @@ export default function Routes() {
         component={Dashboard_Students}
         isPrivate
       />
+      <Route path="/edit_student" component={Edit_Student} isPrivate />
       <Route path="/dashboard_plans" component={Dashboard_Plans} isPrivate />
       <Route
         path="/dashboard_registrations"

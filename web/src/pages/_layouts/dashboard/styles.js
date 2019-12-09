@@ -64,6 +64,10 @@ export const Options = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  a {
+    color: #fff;
+  }
 `;
 
 export const Search = styled.div`
@@ -77,6 +81,7 @@ export const Search = styled.div`
 
   button {
     background-color: #fff;
+
     margin: 0;
   }
 `;
