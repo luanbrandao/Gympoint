@@ -92,6 +92,9 @@ export const BtnComeBack = styled.button`
 
 export const BtnBtnToSave = styled.button`
   background-color: ${colors.primary};
+  strong {
+    color: #fff;
+  }
   &:hover {
     background: ${darken(0.03, `${colors.primary}`)};
   }
@@ -180,6 +183,6 @@ export const InputGroup = styled.div`
     /* display: flex; */
   }
   input {
-    border: 2px solid red;
+    width: 80%;
   }
 `;

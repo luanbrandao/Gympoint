@@ -49,7 +49,7 @@ export default function Register_Student() {
               <Link to="/dashboard_students">Voltar</Link>
             </div>
           </BtnComeBack>
-          <BtnBtnToSave type="button">
+          <BtnBtnToSave type="submit" form="form">
             <div>
               <MdAdd size={20} color="#FFF" />
               <strong>Salvar</strong>
@@ -60,10 +60,25 @@ export default function Register_Student() {
       </Header>
 
       <Main>
-        <Form schema={schema} onSubmit={handleSubmit}>
-          <Input onFocus label="Nome Completo" name="name" type="text" />
-          <Input label="ENDERAÇO DE E-MAIL" name="email" type="email" />
-          <Input label="SEU TELEFONE" name="phone" type="text" />
+        <Form id="form" form="teste" schema={schema} onSubmit={handleSubmit}>
+          <Input
+            label="Nome Completo"
+            name="name"
+            type="text"
+            placeholder="exemplo"
+          />
+          <Input
+            label="ENDERAÇO DE E-MAIL"
+            name="email"
+            type="email"
+            placeholder="exemplo@gmail.com"
+          />
+          <Input
+            label="SEU TELEFONE"
+            name="phone"
+            type="text"
+            placeholder="93 991919191"
+          />
           <InputGroup>
             <div>
               <Input label="IDADE" name="age" type="number" />
@@ -77,7 +92,6 @@ export default function Register_Student() {
               <Input label="ALTURA" name="height" type="number" />
             </div>
           </InputGroup>
-          <button type="submit">Salvar</button>
         </Form>
       </Main>
     </Container>
