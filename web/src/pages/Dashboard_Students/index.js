@@ -11,6 +11,7 @@ import {
   Edite,
   Delete,
 } from '~/pages/_layouts/dashboard/styles';
+import history from '~/services/history';
 
 import api from '~/services/api';
 
@@ -50,6 +51,9 @@ export default function Dashboard_Students() {
     }
   }
 
+  function handleEdit(student) {
+    history.push('/edit_student', { student });
+  }
   return (
     <Container>
       <Header>
@@ -100,8 +104,9 @@ export default function Dashboard_Students() {
                 <td>{student.email}</td>
                 <td>{student.phone}</td>
                 <td>
-                  <Edite type="button">
-                    <Link to="/edit_student">editar</Link>
+                  <Edite type="button" onClick={() => handleEdit(student)}>
+                    {/* <Link to="/edit_student/1">editar</Link> */}
+                    <span>editar</span>
                     <MdEdit />
                   </Edite>
                 </td>

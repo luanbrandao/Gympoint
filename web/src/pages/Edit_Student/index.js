@@ -1,5 +1,5 @@
 import { MdAdd, MdArrowBack } from 'react-icons/md';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
@@ -14,6 +14,7 @@ import {
   BtnBtnToSave,
 } from '~/pages/_layouts/register/styles';
 import api from '~/services/api';
+import history from '~/services/history';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('O nome é obrigatório'),
@@ -24,13 +25,21 @@ const schema = Yup.object().shape({
 });
 
 export default function Edit_Student() {
-  async function handleSubmit(data, { resetForm }) {
+  const [student, setStudent] = useState([]);
+
+  useEffect(() => {
+    setStudent(history.location.state.student);
+  }, [student]);
+
+  async function handleSubmit(data) {
+    const { id } = student;
+    const newData = { ...data, id };
     try {
-      await api.post('students', data);
-      toast.success('Cadastro realizado com sucesso!');
-      resetForm();
+      await api.put('students', newData);
+      toast.success('Aluno atualizado');
+      history.push('/dashboard_students', { student });
     } catch (error) {
-      toast.error('Falha no cadastro, tente novamente');
+      toast.error('Falha ao atualizar o aluno, tente novamente');
     }
   }
 
@@ -60,7 +69,13 @@ export default function Edit_Student() {
       </Header>
 
       <Main>
-        <Form id="form" form="teste" schema={schema} onSubmit={handleSubmit}>
+        <Form
+          initialData={student}
+          id="form"
+          form="teste"
+          schema={schema}
+          onSubmit={handleSubmit}
+        >
           <Input
             label="Nome Completo"
             name="name"
