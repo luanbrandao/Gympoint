@@ -41,14 +41,6 @@ export default function Register_Plan() {
       toast.error('Falha no cadastro, tente novamente');
     }
   }
-
-  function updateDuration(e) {
-    setDuration(e.target.value);
-  }
-  function updatePrice(e) {
-    setPrice(e.target.value);
-  }
-
   return (
     <Container>
       <Header>
@@ -81,7 +73,8 @@ export default function Register_Plan() {
           <InputGroup>
             <div>
               <Input
-                onChange={updateDuration}
+                // onChange={updateDuration}
+                onChange={e => setDuration(e.target.value)}
                 label="DUTAÇÃO (em meses)"
                 name="duration"
                 type="number"
@@ -90,7 +83,7 @@ export default function Register_Plan() {
 
             <div>
               <Input
-                onChange={updatePrice}
+                onChange={e => setPrice(e.target.value)}
                 label="PREÇO MENSAL"
                 name="price"
                 type="number"
