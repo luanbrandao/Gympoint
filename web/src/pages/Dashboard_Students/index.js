@@ -1,6 +1,7 @@
 import { MdAdd, MdSearch, MdEdit, MdDelete } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   Container,
   Header,
@@ -31,6 +32,14 @@ export default function Dashboard_Students() {
     loadStudents();
   }, []);
 
+  async function getStudents() {
+    const response = await api.get('students');
+    // executa a formatação assim que pega os dados da api
+    // para executar apenas uma unica vez
+    const { data } = response;
+    setStudents(data.students);
+  }
+
   function handleInputChange(e) {
     console.tron.log('e.target.value => ', e.target.value);
     setNameStudent(e.target.value);
@@ -54,6 +63,19 @@ export default function Dashboard_Students() {
   function handleEdit(student) {
     history.push('/edit_student', { student });
   }
+
+  async function handleDelete(student) {
+    // console.log("id => " ,student.id);
+
+    try {
+      await api.delete(`students/${student.id}`);
+      toast.success('Aluno deletado com sucesso!');
+      getStudents();
+    } catch (error) {
+      toast.error('Falha ao deletar o aluno, tente novamente');
+    }
+  }
+
   return (
     <Container>
       <Header>
@@ -113,7 +135,7 @@ export default function Dashboard_Students() {
                   </Edite>
                 </td>
                 <td>
-                  <Delete type="button">
+                  <Delete type="button" onClick={() => handleDelete(student)}>
                     apagar
                     <MdDelete />
                   </Delete>
