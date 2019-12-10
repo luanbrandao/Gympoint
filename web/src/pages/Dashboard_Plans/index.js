@@ -1,5 +1,6 @@
 import { MdAdd, MdEdit, MdDelete } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -40,7 +41,7 @@ export default function Dashboard_Plans() {
           <button type="button">
             <div>
               <MdAdd size={20} color="#FFF" />
-              <strong>CADASTRAR</strong>
+              <Link to="/register_plan">CADASTRAR</Link>
             </div>
           </button>
         </Options>
@@ -53,6 +54,7 @@ export default function Dashboard_Plans() {
               <th>Título</th>
               <th>Duração</th>
               <th>Valor p/Mês</th>
+              <th>Total</th>
               {/* <th />
               <th /> */}
             </tr>
@@ -60,10 +62,15 @@ export default function Dashboard_Plans() {
 
           <tbody>
             {plans.map(plan => (
-              <tr key={plan.title}>
+              <tr key={plan.id}>
                 <td>{plan.title}</td>
-                <td>{plan.duration}</td>
+                <td>
+                  {plan.duration > 1
+                    ? ` ${plan.duration} meses`
+                    : `${plan.duration} mês`}
+                </td>
                 <td>R$ {plan.price}</td>
+                <td>R$ {plan.total_price}</td>
                 <td>
                   <Edite type="button">
                     editar
