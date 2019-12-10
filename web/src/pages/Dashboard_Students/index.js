@@ -52,7 +52,6 @@ export default function Dashboard_Students() {
   }
 
   function handleEdit(student) {
-    console.log('studant => ', student);
     history.push('/edit_student', { student });
   }
   return (

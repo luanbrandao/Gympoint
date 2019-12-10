@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
+import { format, addDays } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import {
   Container,
   Header,
@@ -31,13 +33,22 @@ export default function Edit_Student() {
   const [student, setStudent] = useState([]);
 
   useEffect(() => {
-    setStudent(history.location.state.student);
-  }, [student]);
+    const data = history.location.state.student;
+    const formattedDate = format(
+      addDays(new Date(data.date_birth), 1),
+      'yyyy-MM-dd',
+      {
+        locale: pt,
+      }
+    );
+    data.date_birth = formattedDate;
+    setStudent(data);
+  }, []);
 
   async function handleSubmit(data) {
     const { id } = student;
     const newData = { ...data, id };
-    console.log('new date ', newData);
+    // console.log('new date ', newData);
     try {
       await api.put('students', newData);
       toast.success('Aluno atualizado');
@@ -92,6 +103,12 @@ export default function Edit_Student() {
             type="email"
             placeholder="exemplo@gmail.com"
           />
+          <Input
+            label="TELEFONE"
+            name="phone"
+            type="text"
+            placeholder="93 991919191"
+          />
           <InputGroup>
             {/* <div>
               <Input label="Data Nasc." name="date_birth" type="date" />
@@ -99,9 +116,9 @@ export default function Edit_Student() {
 
             <div>
               <Input
-                label="TELEFONE"
-                name="phone"
-                type="text"
+                label="DATA/NASC"
+                name="date_birth"
+                type="date"
                 placeholder="93 991919191"
               />
             </div>

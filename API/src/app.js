@@ -10,6 +10,7 @@ import './database';
 // yarn add eslint -D
 // yarn eslint --init
 // deixa o codigo bonito kk
+// yarn add date-fns-tz
 // yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
 // todos os arquivos dentro da pasta src sao ajustados com o eslint automaticamente
 // yarn eslint --fix src --ext .js
