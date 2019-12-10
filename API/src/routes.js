@@ -47,6 +47,7 @@ routes.post('/files', upload.single('file'), FileController.store);
 routes.put('/users', UserController.update);
 routes.post('/students', StudentController.store);
 routes.put('/students', StudentController.update);
+routes.delete('/students/:id', StudentController.delete);
 
 routes.post('/plans', isAdminMiddleware, PlansController.store);
 routes.get('/plans', isAdminMiddleware, PlansController.index);
