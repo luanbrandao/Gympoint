@@ -12,19 +12,20 @@ import {
 
 import api from '~/services/api';
 
-export default function Dashboard_Student() {
-  const [students, setStudents] = useState([]);
+export default function Dashboard_Registrations() {
+  const [registrations, setRegistrations] = useState([]);
 
   useEffect(() => {
-    async function loadStudents() {
-      const response = await api.get('students');
+    async function loadregistrations() {
+      const response = await api.get('registrations');
       // executa a formatação assim que pega os dados da api
       // para executar apenas uma unica vez
       const { data } = response;
-      setStudents(data.students);
+      console.log(data.registration);
+      setRegistrations(data.registration);
     }
 
-    loadStudents();
+    loadregistrations();
   }, []);
 
   return (
@@ -49,8 +50,7 @@ export default function Dashboard_Student() {
           <thead>
             <tr>
               <th>ALUNO</th>
-              <th>PLANO</th>
-              <th>INÍCIO</th>
+              <th>Plano</th>
               <th>INÍCIO</th>
               <th>TÉRMINO</th>
               <th>ATIVO</th>
@@ -58,13 +58,13 @@ export default function Dashboard_Student() {
           </thead>
 
           <tbody>
-            {students.map(student => (
-              <tr key={student.email}>
-                <td>{student.name}</td>
-                <td>{student.email}</td>
-                <td>{student.phone}</td>
-                <td>{student.phone}</td>
-                <td>{student.phone}</td>
+            {registrations.map(registration => (
+              <tr key={registration.id}>
+                <td>{registration.student.name}</td>
+                <td>{registration.plan.title}</td>
+                <td>{registration.start_date}</td>
+                <td>{registration.end_date}</td>
+                <td>{registration.active ? 'on' : 'off'}</td>
                 <td>
                   <Edite type="button">
                     editar
