@@ -1,5 +1,5 @@
 import { MdAdd, MdArrowBack } from 'react-icons/md';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
@@ -25,16 +25,11 @@ const schema = Yup.object().shape({
 export default function Register_Plan() {
   const [price, setPrice] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  useEffect(() => {
-    setTotalPrice(price * duration);
-  }, [price, duration]);
+  const totalPrice = useMemo(() => price * duration, [price, duration]);
 
   async function handleSubmit(data, { resetForm }) {
     try {
       await api.post('plans', data);
-      setTotalPrice(0);
       toast.success('Cadastro realizado com sucesso!');
       resetForm();
     } catch (error) {
