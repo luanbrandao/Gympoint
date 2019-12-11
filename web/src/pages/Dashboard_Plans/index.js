@@ -1,6 +1,7 @@
 import { MdAdd, MdEdit, MdDelete } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   Container,
   Header,
@@ -31,8 +32,26 @@ export default function Dashboard_Plans() {
     loadStudents();
   }, []);
 
+  async function getPlans() {
+    const response = await api.get('plans');
+    const { data } = response;
+    setPlans(data.plans);
+  }
+
   function handleEdit(plan) {
     history.push('/edit_plan', { plan });
+  }
+
+  async function handleDelete(plan) {
+    // console.log("id => " ,student.id);
+
+    try {
+      await api.delete(`plans/${plan.id}`);
+      toast.success('PLano deletado com sucesso!');
+      getPlans();
+    } catch (error) {
+      toast.error('Falha ao deletar o aluno, tente novamente');
+    }
   }
 
   return (
@@ -83,7 +102,7 @@ export default function Dashboard_Plans() {
                   </Edite>
                 </td>
                 <td>
-                  <Delete type="button">
+                  <Delete type="button" onClick={() => handleDelete(plan)}>
                     apagar
                     <MdDelete />
                   </Delete>
