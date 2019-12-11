@@ -11,6 +11,7 @@ import Register_Student from '~/pages/Register_Student';
 import Profile from '../pages/Profile';
 import Dashboard_Plans from '~/pages/Dashboard_Plans';
 import Register_Plan from '~/pages/Register_Plan';
+import Edit_Plan from '~/pages/Edit_Plan';
 import Dashboard_Registrations from '~/pages/Dashboard_Registrations';
 import Dashboard_Help_Orders from '~/pages/Dashboard_Help_Orders';
 
@@ -28,6 +29,7 @@ export default function Routes() {
       <Route path="/edit_student" component={Edit_Student} isPrivate />
       <Route path="/dashboard_plans" component={Dashboard_Plans} isPrivate />
       <Route path="/register_plan" component={Register_Plan} isPrivate />
+      <Route path="/edit_plan" component={Edit_Plan} isPrivate />
 
       <Route
         path="/dashboard_registrations"

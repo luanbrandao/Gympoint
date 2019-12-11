@@ -12,6 +12,7 @@ import {
 } from '~/pages/_layouts/dashboard/styles';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 export default function Dashboard_Plans() {
   const [plans, setPlans] = useState([]);
@@ -29,6 +30,10 @@ export default function Dashboard_Plans() {
 
     loadStudents();
   }, []);
+
+  function handleEdit(plan) {
+    history.push('/edit_plan', { plan });
+  }
 
   return (
     <Container>
@@ -72,8 +77,8 @@ export default function Dashboard_Plans() {
                 <td>R$ {plan.price}</td>
                 <td>R$ {plan.total_price}</td>
                 <td>
-                  <Edite type="button">
-                    editar
+                  <Edite type="button" onClick={() => handleEdit(plan)}>
+                    <span>editar</span>
                     <MdEdit />
                   </Edite>
                 </td>
