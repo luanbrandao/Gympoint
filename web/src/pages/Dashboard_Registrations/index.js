@@ -1,5 +1,7 @@
-import { MdAdd, MdEdit, MdDelete } from 'react-icons/md';
+import { format, parseISO } from 'date-fns';
+import { MdAdd, MdEdit, MdDelete, MdCheckCircle } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
+import pt from 'date-fns/locale/pt';
 import {
   Container,
   Header,
@@ -9,7 +11,6 @@ import {
   Edite,
   Delete,
 } from '~/pages/_layouts/dashboard/styles';
-
 import api from '~/services/api';
 
 export default function Dashboard_Registrations() {
@@ -21,8 +22,22 @@ export default function Dashboard_Registrations() {
       // executa a formatação assim que pega os dados da api
       // para executar apenas uma unica vez
       const { data } = response;
-      console.log(data.registration);
-      setRegistrations(data.registration);
+
+      const formattedDate = data.registrations.map(registration => {
+        registration.start_date = format(
+          parseISO(registration.start_date),
+          "dd 'de' MMMM 'de' yyyy",
+          { locale: pt }
+        );
+        registration.end_date = format(
+          parseISO(registration.end_date),
+          "dd 'de' MMMM 'de' yyyy",
+          { locale: pt }
+        );
+        return registration;
+      });
+
+      setRegistrations(formattedDate);
     }
 
     loadregistrations();
@@ -64,7 +79,13 @@ export default function Dashboard_Registrations() {
                 <td>{registration.plan.title}</td>
                 <td>{registration.start_date}</td>
                 <td>{registration.end_date}</td>
-                <td>{registration.active ? 'on' : 'off'}</td>
+                <td>
+                  {registration.active ? (
+                    <MdCheckCircle size={20} color="#00FF00" />
+                  ) : (
+                    <MdCheckCircle size={20} />
+                  )}
+                </td>
                 <td>
                   <Edite type="button">
                     editar

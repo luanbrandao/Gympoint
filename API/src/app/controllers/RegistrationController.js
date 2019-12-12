@@ -10,7 +10,7 @@ class RegistrationController {
   async index(req, res) {
     const { page = 1 } = req.query;
 
-    const registration = await Registration.findAll({
+    const registrations = await Registration.findAll({
       attributes: [
         'id',
         'start_date',
@@ -36,7 +36,7 @@ class RegistrationController {
       ],
     });
 
-    return res.json({ registration });
+    return res.json({ registrations });
   }
 
   async store(req, res) {
