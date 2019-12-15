@@ -12,6 +12,17 @@ export const Container = styled.div`
 
   input[type='text'],
   [type='number'],
+  [type='date'],
+  [type='email'] {
+    border: 1px solid lightblue;
+    border-radius: 4px;
+    /* padding: 20px; */
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+  select[type='text'],
+  [type='number'],
+  [type='date'],
   [type='email'] {
     border: 1px solid lightblue;
     border-radius: 4px;
@@ -22,6 +33,13 @@ export const Container = styled.div`
 
   input[type='text']:focus,
   [type='number']:focus,
+  [type='date']:focus,
+  [type='email']:focus {
+    border: 3px solid black;
+  }
+  select[type='text']:focus,
+  [type='number']:focus,
+  [type='date']:focus,
   [type='email']:focus {
     border: 3px solid black;
   }
@@ -117,6 +135,15 @@ export const Main = styled.div`
       display: box;
     }
 
+    select {
+      background: rgba(255, 255, 255, 0.9);
+      border: 0;
+      border-radius: 4px;
+      height: 44px;
+      padding: 0 15px;
+      color: black;
+      margin: 0 0 10px;
+    }
     input {
       /* background: rgba(0, 0, 0, 0.1); */
       background: rgba(255, 255, 255, 0.9);
@@ -184,5 +211,11 @@ export const InputGroup = styled.div`
   }
   input {
     width: 80%;
+  }
+
+  span {
+    /* margin: 10px; */
+    padding-left: 10px;
+    padding-top: 5px;
   }
 `;

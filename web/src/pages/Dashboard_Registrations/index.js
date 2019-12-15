@@ -2,6 +2,7 @@ import { format, parseISO } from 'date-fns';
 import { MdAdd, MdEdit, MdDelete, MdCheckCircle } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
 import pt from 'date-fns/locale/pt';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Header,
@@ -54,7 +55,7 @@ export default function Dashboard_Registrations() {
           <button type="button">
             <div>
               <MdAdd size={20} color="#FFF" />
-              <strong>CADASTRAR</strong>
+              <Link to="/register_registrarions">CADASTRAR</Link>
             </div>
           </button>
         </Options>
