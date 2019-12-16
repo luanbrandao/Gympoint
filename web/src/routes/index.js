@@ -14,6 +14,7 @@ import Register_Plan from '~/pages/Register_Plan';
 import Edit_Plan from '~/pages/Edit_Plan';
 import Dashboard_Registrations from '~/pages/Dashboard_Registrations';
 import Register_Registrarions from '~/pages/Register_Registrarions';
+import Edit_Registrations from '~/pages/Edit_Registrations';
 import Dashboard_Help_Orders from '~/pages/Dashboard_Help_Orders';
 
 export default function Routes() {
@@ -40,6 +41,11 @@ export default function Routes() {
       <Route
         path="/register_registrarions"
         component={Register_Registrarions}
+        isPrivate
+      />
+      <Route
+        path="/edit_registrarion"
+        component={Edit_Registrations}
         isPrivate
       />
       <Route

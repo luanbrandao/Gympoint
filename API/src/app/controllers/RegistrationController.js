@@ -124,7 +124,7 @@ class RegistrationController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { plan_id, start_date } = req.body;
+    const { plan_id, start_date, student_id } = req.body;
 
     const plan = await Plan.findByPk(plan_id);
     if (!plan) {
@@ -141,7 +141,13 @@ class RegistrationController {
     const date = format(parseISO(start_date), 'yyyy/MM/dd').split('/');
     const end_date = addMonths(new Date(date), plan.duration);
 
-    await registration.update({ plan_id, price, start_date, end_date });
+    await registration.update({
+      student_id,
+      plan_id,
+      price,
+      start_date,
+      end_date,
+    });
 
     await Mail.sendMail({
       to: `${student.name} <${student.email}>`,

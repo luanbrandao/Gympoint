@@ -13,6 +13,7 @@ import {
   Delete,
 } from '~/pages/_layouts/dashboard/styles';
 import api from '~/services/api';
+import history from '~/services/history';
 
 export default function Dashboard_Registrations() {
   const [registrations, setRegistrations] = useState([]);
@@ -43,6 +44,10 @@ export default function Dashboard_Registrations() {
 
     loadregistrations();
   }, []);
+
+  function handleEdit(registrarion) {
+    history.push('/edit_registrarion', { registrarion });
+  }
 
   return (
     <Container>
@@ -88,8 +93,9 @@ export default function Dashboard_Registrations() {
                   )}
                 </td>
                 <td>
-                  <Edite type="button">
-                    editar
+                  <Edite type="button" onClick={() => handleEdit(registration)}>
+                    {/* <Link to="/edit_student/1">editar</Link> */}
+                    <span>editar</span>
                     <MdEdit />
                   </Edite>
                 </td>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Form, Input, Select, Scope } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { addMonths, format, addDays } from 'date-fns';
+import { format, addDays, addMonths } from 'date-fns';
 
 import {
   Container,
@@ -16,19 +16,26 @@ import {
   BtnBtnToSave,
 } from '~/pages/_layouts/register/styles';
 import api from '~/services/api';
+import history from '~/services/history';
 
 const schema = Yup.object().shape({
   student: Yup.string().required('O nome é obrigatório'),
   plan: Yup.string().required('O plano é obrigatório'),
   start_date: Yup.string().required('O data de início é obrigatória'),
 });
+export default function Edit_Registrations() {
+  const [registrarion, setRegistrarion] = useState([]);
 
-export default function Register_Registrarions() {
   const [students, setStudents] = useState([]);
   const [nameStudent, setNameStudent] = useState('');
   const [plans, setPlans] = useState([]);
   const [planId, setPlanId] = useState(0);
   const [startDate, setStartDate] = useState('');
+
+  useEffect(() => {
+    const data = history.location.state.registrarion;
+    setRegistrarion(data);
+  }, []);
 
   const end_date = useMemo(() => {
     const plantSelected = plans.find(p => p.id == planId);
@@ -93,13 +100,15 @@ export default function Register_Registrarions() {
       plan_id: data.plan,
       start_date: data.start_date,
     };
+    // console.log('params => ', params);
+    // console.log('registrarion => ', registrarion);
 
     try {
-      await api.post('registrations', params);
-      toast.success('Matricula realizado com sucesso!');
+      await api.put(`registrations/${registrarion.id}`, params);
+      toast.success('Matricula atualizada com sucesso!');
       resetForm();
     } catch (error) {
-      toast.error('Falha na matricula, tente novamente');
+      toast.error('Falha ao atualizar a matricula, tente novamente');
     }
   }
 
@@ -107,7 +116,7 @@ export default function Register_Registrarions() {
     <Container>
       <Header>
         <div>
-          <h1>Gerencia de Matriculas</h1>
+          <h1>Edição de matricula</h1>
         </div>
         <Options>
           <BtnComeBack type="button">
