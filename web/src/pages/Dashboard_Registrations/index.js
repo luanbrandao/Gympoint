@@ -3,6 +3,7 @@ import { MdAdd, MdEdit, MdDelete, MdCheckCircle } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
 import pt from 'date-fns/locale/pt';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   Container,
   Header,
@@ -45,8 +46,43 @@ export default function Dashboard_Registrations() {
     loadregistrations();
   }, []);
 
+  async function getRegistrations() {
+    const response = await api.get('registrations');
+    // executa a formatação assim que pega os dados da api
+    // para executar apenas uma unica vez
+    const { data } = response;
+
+    const formattedDate = data.registrations.map(registration => {
+      registration.start_date = format(
+        parseISO(registration.start_date),
+        "dd 'de' MMMM 'de' yyyy",
+        { locale: pt }
+      );
+      registration.end_date = format(
+        parseISO(registration.end_date),
+        "dd 'de' MMMM 'de' yyyy",
+        { locale: pt }
+      );
+      return registration;
+    });
+
+    setRegistrations(formattedDate);
+  }
+
   function handleEdit(registrarion) {
     history.push('/edit_registrarion', { registrarion });
+  }
+
+  async function handleDelete(register) {
+    // console.log('registrarion => ', register);
+
+    try {
+      await api.delete(`registrations/${register.id}`);
+      toast.success('Matricula deletado com sucesso!');
+      getRegistrations();
+    } catch (error) {
+      toast.error('Falha ao deletar a matricula, tente novamente');
+    }
   }
 
   return (
@@ -100,7 +136,10 @@ export default function Dashboard_Registrations() {
                   </Edite>
                 </td>
                 <td>
-                  <Delete type="button">
+                  <Delete
+                    type="button"
+                    onClick={() => handleDelete(registration)}
+                  >
                     apagar
                     <MdDelete />
                   </Delete>
