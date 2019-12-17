@@ -1,12 +1,10 @@
+import { Text } from 'react-native';
 import React from 'react';
-import {Text} from 'react-native';
 
-const App: () => React$Node = () => {
+export default function App() {
   return (
     <>
       <Text>OK</Text>
     </>
   );
-};
-
-export default App;
+}
