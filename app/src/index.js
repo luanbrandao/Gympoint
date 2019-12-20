@@ -1,26 +1,14 @@
 import React from 'react';
-import Teste from '~/Teste';
-import Background from '~/components/Background';
-import Input from '~/components/Input';
-import Button from '~/components/Button';
+import Routes from './routes';
 // yarn add react-native-linear-gradient
 // react-native link react-native-linear-gradient
 // yarn add styled-components
 // yarn add prop-types
 // yarn add react-native-vector-icons
 // react-native-gesture-handler
+// yarn add react-navigation
+// yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23
+
 export default function App() {
-  return (
-    <>
-      <Background>
-        <Teste />
-        <Input
-          style={{ marginTop: 30 }}
-          icon="call"
-          placeholder="Digite se nome"
-        />
-        <Button>Entrar</Button>
-      </Background>
-    </>
-  );
+  return <Routes />;
 }
