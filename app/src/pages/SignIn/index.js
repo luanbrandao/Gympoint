@@ -1,8 +1,35 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Image } from 'react-native';
+import Background from '~/components/Background';
+import logo from '~/assets/logo.png';
+import {
+  Container,
+  Form,
+  FormInput,
+  SubmitButton,
+  SignLink,
+  SignLinkText,
+} from './styles';
 
-// import { Container } from './styles';
+export default function SignIn({ navigation }) {
+  return (
+    <Background>
+      <Container>
+        <Image source={logo} />
+        <Form>
+          <FormInput
+            icon="lock-outline"
+            secureTextEntry
+            placeholder="Infome seu ID de cadastro"
+            autoCapitalize="none"
+          />
+          <SubmitButton onPress={() => {}}>Acessar</SubmitButton>
+        </Form>
 
-export default function SignIn() {
-  return <Text>OK</Text>;
+        <SignLink onPress={() => navigation.navigate('SignUp')}>
+          <SignLinkText>Criar conta gratuita</SignLinkText>
+        </SignLink>
+      </Container>
+    </Background>
+  );
 }
