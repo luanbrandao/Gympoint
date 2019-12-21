@@ -1,7 +1,12 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
-import Routes from './routes';
 import './config/ReactotronConfig';
+
+import { PersistGate } from 'redux-persist/es/integration/react';
+import { Provider } from 'react-redux';
+
+import { store, persistor } from './store';
+import Routes from './routes';
 // yarn add react-native-linear-gradient
 // react-native link react-native-linear-gradient
 // yarn add styled-components
@@ -13,9 +18,11 @@ import './config/ReactotronConfig';
 
 export default function App() {
   return (
-    <>
-      <StatusBar barStyle="light-content" backgroundColor="#bbd2c5" />
-      <Routes />
-    </>
+    <Provider store={store}>
+      <PersistGate persistor={persistor} >
+        <StatusBar barStyle="light-content" backgroundColor="#bbd2c5" />
+        <Routes />
+      </PersistGate>
+    </Provider>
   );
 }
