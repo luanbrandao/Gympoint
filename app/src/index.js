@@ -6,7 +6,9 @@ import { PersistGate } from 'redux-persist/es/integration/react';
 import { Provider } from 'react-redux';
 
 import { store, persistor } from './store';
-import Routes from './routes';
+// import Routes from './routes';
+import App from './App';
+
 // yarn add react-native-linear-gradient
 // react-native link react-native-linear-gradient
 // yarn add styled-components
@@ -16,12 +18,12 @@ import Routes from './routes';
 // yarn add react-navigation
 // yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23
 
-export default function App() {
+export default function Index() {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor} >
+      <PersistGate persistor={persistor}>
         <StatusBar barStyle="light-content" backgroundColor="#bbd2c5" />
-        <Routes />
+        <App />
       </PersistGate>
     </Provider>
   );
