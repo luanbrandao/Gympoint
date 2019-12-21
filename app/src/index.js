@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 import Routes from './routes';
+import './config/ReactotronConfig';
 // yarn add react-native-linear-gradient
 // react-native link react-native-linear-gradient
 // yarn add styled-components
