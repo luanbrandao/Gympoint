@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import Routes from './routes';
 // yarn add react-native-linear-gradient
 // react-native link react-native-linear-gradient
@@ -10,5 +11,10 @@ import Routes from './routes';
 // yarn add react-native-reanimated react-native-gesture-handler react-native-screens@^1.0.0-alpha.23
 
 export default function App() {
-  return <Routes />;
+  return (
+    <>
+      <StatusBar barStyle="light-content" backgroundColor="#bbd2c5" />
+      <Routes />
+    </>
+  );
 }
