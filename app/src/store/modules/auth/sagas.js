@@ -6,14 +6,18 @@ import { signInSuccess, signFailure } from './actions';
 export function* signIn({ payload }) {
   try {
     const { id } = payload;
-    console.tron.log('blz =>', payload);
+    console.tron.log('blz =>', id);
 
-    const response = yield call(api.post, `students/${id}/checkins`);
+    // const response = yield call(api.post, `students/${id}/checkins`);
 
-    const { student_id } = response.data;
+    const response = yield call(api.post, 'sessions-students', {
+      id,
+    });
+
+    const { student } = response.data;
     console.tron.log('response.data =>', response.data);
 
-    if (!student_id) {
+    if (!student) {
       Alert.alert('Erro no login', 'O usuário não foi encontrado');
       yield put(signFailure());
       return;
@@ -23,7 +27,7 @@ export function* signIn({ payload }) {
     // api.defaults.headers.Authorization = `Bearer ${token}`;
 
     // yield delay(3000);
-    yield put(signInSuccess(id));
+    yield put(signInSuccess(student));
   } catch (error) {
     console.tron.log('error => ', error);
     Alert.alert(

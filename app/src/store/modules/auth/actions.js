@@ -5,10 +5,10 @@ export function signInRequest(id) {
   };
 }
 
-export function signInSuccess(id) {
+export function signInSuccess(student) {
   return {
     type: '@auth/SIGN_IN_SUCCESS',
-    payload: { id },
+    payload: { student },
   };
 }
 

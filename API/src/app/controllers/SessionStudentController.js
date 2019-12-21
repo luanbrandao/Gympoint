@@ -19,7 +19,7 @@ class SessionStudentController {
       return res.status(401).json({ error: 'Student not exist!' });
     }
 
-    return res.json(student);
+    return res.json({student});
   }
 }
 
