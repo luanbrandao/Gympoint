@@ -1,10 +1,15 @@
 import React from 'react';
-import { View } from 'react-native';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Background from '~/components/Background';
 // import { Container } from './styles';
 
 export default function Dashboard() {
-  return (
-    <View />
-  );
+  return <Background />;
 }
+
+Dashboard.navigationOptions = {
+  tabBarLabel: 'Check-Ins',
+  tabBarIcon: ({ tintColor }) => (
+    <Icon name="check" size={20} color={tintColor} />
+  ),
+};
