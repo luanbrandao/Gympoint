@@ -2,6 +2,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
 
 export default (signedIn = false) =>
   createAppContainer(
@@ -13,6 +14,7 @@ export default (signedIn = false) =>
         App: createBottomTabNavigator(
           {
             Dashboard,
+            Profile,
           },
           {
             tabBarOptions: {
