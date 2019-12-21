@@ -5,6 +5,7 @@ import multer from 'multer';
 import muterConfig from './config/multer';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
+import SessionStudentController from './app/controllers/SessionStudentController';
 import authMiddleware from './app/middlewares/auth';
 import isAdminMiddleware from './app/middlewares/admin';
 import StudentController from './app/controllers/StudentController';
@@ -35,6 +36,7 @@ const upload = multer(muterConfig);
 
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
+routes.post('/sessions-students', SessionStudentController.store);
 routes.post('/students/:student_id/checkins', CheckinsController.store);
 // authMiddleware, só pega as rotas depois dele
 routes.use(authMiddleware);
