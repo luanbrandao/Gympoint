@@ -11,6 +11,7 @@ import {
   SignLinkText,
 } from './styles';
 
+function handleSubmit() {}
 export default function SignIn({ navigation }) {
   return (
     <Background>
@@ -22,8 +23,9 @@ export default function SignIn({ navigation }) {
             secureTextEntry
             placeholder="Infome seu ID de cadastro"
             autoCapitalize="none"
+            onSubmitEditing={handleSubmit}
           />
-          <SubmitButton onPress={() => {}}>Acessar</SubmitButton>
+          <SubmitButton onPress={() => handleSubmit}>Acessar</SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignUp')}>
