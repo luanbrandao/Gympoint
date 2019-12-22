@@ -37,8 +37,11 @@ const upload = multer(muterConfig);
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 routes.post('/sessions-students', SessionStudentController.store);
+
+routes.get('/students/:student_id/checkins', CheckinsController.index);
 routes.post('/students/:student_id/checkins', CheckinsController.store);
 // authMiddleware, só pega as rotas depois dele
+
 routes.use(authMiddleware);
 
 // routes.post('/files', upload.single('file'), (req, res) => {
@@ -69,7 +72,6 @@ routes.put(
   RegistrationController.update
 );
 
-routes.get('/students/:student_id/checkins', CheckinsController.index);
 routes.get(
   '/students/:student_id/help-orders',
   HelpOrdersStudentController.index

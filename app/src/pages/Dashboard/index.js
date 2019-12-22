@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Image } from 'react-native';
 import Background from '~/components/Background';
 import { Container, Header, List, BtnCheckIn } from './styles';
 import CheckIn from '~/components/CheckIn';
 import logo from '~/assets/logo.png';
+import api from '~/services/api';
+import { store } from '~/store';
 
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 export default function Dashboard() {
+  const [checkIns, setCheckIns] = useState([]);
+  const { student } = store.getState().auth;
+
+  useEffect(() => {
+    async function loadCheckIns() {
+      const response = await api.get(`students/${student.id}/checkins`);
+      setCheckIns(response.data.checkins);
+    }
+    loadCheckIns();
+  }, []);
+
   return (
     <Background>
       <Container>
@@ -16,9 +28,9 @@ export default function Dashboard() {
         </Header>
         <BtnCheckIn>Novo Check-in</BtnCheckIn>
         <List
-          data={data}
-          keyExtractor={item => String(item)}
-          renderItem={({ item }) => <CheckIn data={item} />}
+          data={checkIns}
+          keyExtractor={item => String(item.id)}
+          renderItem={({ item, index }) => <CheckIn data={{ item, index }} />}
         />
       </Container>
     </Background>

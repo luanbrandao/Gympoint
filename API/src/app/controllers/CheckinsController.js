@@ -34,7 +34,7 @@ class CheckinsController {
       offset: (page - 1) * 20,
     });
 
-    return res.json(checkins);
+    return res.json({ checkins });
   }
 
   async store(req, res) {
