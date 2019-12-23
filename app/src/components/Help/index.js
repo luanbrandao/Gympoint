@@ -1,33 +1,46 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { parseISO, formatRelative } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import {
   HelpContainer,
   HelpInfo,
   HelpStatus,
-  HelpStatusText,
+  HelpText,
+  HelpTextAnswer,
   HelpTime,
   HelpQuestion,
 } from './styles';
 
-export default function Help({ onDetais }) {
+export default function Help({ data, onDetais }) {
+  const dateParsed = useMemo(() => {
+    return formatRelative(parseISO(data.createdAt), new Date(), {
+      locale: pt,
+      addSuffix: true,
+    });
+  }, [data.createdAt]);
+
   return (
     <HelpContainer onPress={onDetais}>
       <HelpInfo>
         <HelpStatus>
-          <Icon name="check" size={20} color="#cecece" />
-          <HelpStatusText>Sem resposta</HelpStatusText>
+          {data.answer ? (
+            <>
+              <Icon name="check" size={20} color="#7FFF00" />
+              <HelpTextAnswer>Respondido</HelpTextAnswer>
+            </>
+          ) : (
+            <>
+              <Icon name="check" size={20} color="#cecece" />
+              <HelpText>Sem resposta</HelpText>
+            </>
+          )}
         </HelpStatus>
 
-        <HelpTime>hoje as 14h</HelpTime>
+        <HelpTime>{dateParsed}</HelpTime>
       </HelpInfo>
 
-      <HelpQuestion>
-        asdf asdf asdf asdfsdfsad fsdaf sadf asdf s df sdf asd asdf asdf asdf
-        asdfsdfsad fsdaf sadf asdf s df sdf asd asdf asdf asdf asdfsdfsad fsdaf
-        sadf asdf s df sdf asd asdf asdf asdf asdfsdfsad fsdaf sadf asdf s df
-        sdf asd asdf asdf asdf asdfsdfsad fsdaf sadf asdf s df sdf asd asdf asdf
-        asdf asdfsdfsad fsdaf sadf asdf s df sdf asd
-      </HelpQuestion>
+      <HelpQuestion>{data.question}</HelpQuestion>
     </HelpContainer>
   );
 }

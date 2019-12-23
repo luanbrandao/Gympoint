@@ -18,7 +18,11 @@ export const HelpStatus = styled.View`
   align-items: center;
 `;
 
-export const HelpStatusText = styled.Text``;
+export const HelpText = styled.Text``;
+
+export const HelpTextAnswer = styled.Text`
+  color: #7fff00;
+`;
 
 export const HelpTime = styled.Text``;
 
