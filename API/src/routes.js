@@ -46,6 +46,11 @@ routes.get(
   HelpOrdersStudentController.index
 );
 
+routes.post(
+  '/students/:student_id/help-orders',
+  HelpOrdersStudentController.store
+);
+
 // authMiddleware, só pega as rotas depois dele
 routes.use(authMiddleware);
 
