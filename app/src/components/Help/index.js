@@ -9,9 +9,9 @@ import {
   HelpQuestion,
 } from './styles';
 
-export default function Help() {
+export default function Help({ onDetais }) {
   return (
-    <HelpContainer>
+    <HelpContainer onPress={onDetais}>
       <HelpInfo>
         <HelpStatus>
           <Icon name="check" size={20} color="#cecece" />

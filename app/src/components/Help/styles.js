@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
-export const HelpContainer = styled.View`
+export const HelpContainer = styled(RectButton)`
   margin: 10px;
   background: #fff;
   border-radius: 4px;

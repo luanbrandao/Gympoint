@@ -8,7 +8,7 @@ import Help from '~/components/Help';
 
 import { Container, NewHelp, HelpList } from './styles';
 
-function Dashboard({ isFocused }) {
+function Dashboard({ isFocused, navigation }) {
   const [helps, setHelps] = useState([]);
   const { student } = store.getState().auth;
 
@@ -24,6 +24,9 @@ function Dashboard({ isFocused }) {
     }
   }, [isFocused]);
 
+  function handleDetais(help) {
+    navigation.navigate('HelpDetails', { help });
+  }
   return (
     <Background>
       <Container>
@@ -32,7 +35,9 @@ function Dashboard({ isFocused }) {
         <HelpList
           data={helps}
           keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => <Help />}
+          renderItem={({ item }) => (
+            <Help onDetais={() => handleDetais(item)} data={item} />
+          )}
         />
       </Container>
     </Background>
