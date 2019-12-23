@@ -1,22 +1,17 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-// import { Container } from './styles';
+import { Container, NewHelp } from './styles';
 import Background from '~/components/Background';
 
 export default function Dashboard() {
-  return <Background />;
+  return (
+    <Background>
+      <Container>
+        <NewHelp onPress={() => {}}>Novo pedido de auxílio</NewHelp>
+      </Container>
+    </Background>
+  );
 }
 
-Dashboard.navigationOptions = ({ navigation }) => ({
+Dashboard.navigationOptions = {
   title: 'Pedidos de ajuda',
-  headerLeft: () => (
-    <TouchableOpacity
-      onPress={() => {
-        navigation.navigate('Dashboard');
-      }}
-    >
-      <Icon name="chevron-left" size={20} color="#fff" />
-    </TouchableOpacity>
-  ),
-});
+};

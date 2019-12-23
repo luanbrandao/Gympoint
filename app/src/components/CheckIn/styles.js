@@ -9,10 +9,10 @@ export const Container = styled.View`
   padding: 10px;
 
   display: flex;
+  flex: 1;
   flex-direction: row;
   align-content: center;
   justify-content: space-between;
-  flex: 1;
 `;
 
 export const Title = styled.Text`
