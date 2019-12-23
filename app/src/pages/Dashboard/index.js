@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Image } from 'react-native';
+import { Image, Alert } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import Background from '~/components/Background';
 import { Container, Header, List, BtnCheckIn } from './styles';
@@ -24,13 +24,23 @@ function Dashboard({ isFocused }) {
     }
   }, [isFocused]);
 
+  async function handleNewCheckIn() {
+    try {
+      await api.post(`students/${student.id}/checkins`);
+      loadCheckIns();
+    } catch (error) {
+      const msg = error.response.data.error;
+      Alert.alert('Atenção', msg);
+    }
+  }
+
   return (
     <Background>
       <Container>
         <Header>
           <Image source={logo} />
         </Header>
-        <BtnCheckIn>Novo Check-in</BtnCheckIn>
+        <BtnCheckIn onPress={handleNewCheckIn}> Novo Check-in</BtnCheckIn>
         <List
           data={checkIns}
           keyExtractor={item => String(item.id)}
