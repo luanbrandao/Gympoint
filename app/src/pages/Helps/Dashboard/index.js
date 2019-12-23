@@ -27,10 +27,14 @@ function Dashboard({ isFocused, navigation }) {
   function handleDetais(help) {
     navigation.navigate('HelpDetails', { help });
   }
+
+  function handleNewHelp(help) {
+    navigation.navigate('HelpNew');
+  }
   return (
     <Background>
       <Container>
-        <NewHelp onPress={() => {}}>Novo pedido de auxílio</NewHelp>
+        <NewHelp onPress={handleNewHelp}>Novo pedido de auxílio</NewHelp>
 
         <HelpList
           data={helps}
