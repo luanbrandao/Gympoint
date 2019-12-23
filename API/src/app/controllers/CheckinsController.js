@@ -70,7 +70,7 @@ class CheckinsController {
     if (checkins.length > 4) {
       return res
         .status(401)
-        .json({ error: 'Have you done 5 checkins this week!' });
+        .json({ error: 'Você já fez 5 check-ins está semana!' });
     }
 
     const checkin = await Checkin.create({ student_id });
