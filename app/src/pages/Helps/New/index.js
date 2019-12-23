@@ -28,7 +28,6 @@ export default function New({ navigation }) {
             placeholder="Inclua seu novo pedido de auxílo"
             returnKeyType="send"
             onSubmitEditing={handleSubmit}
-
           />
           <SubmitButton onPress={handleSubmit}>Novo pedido</SubmitButton>
         </Form>
