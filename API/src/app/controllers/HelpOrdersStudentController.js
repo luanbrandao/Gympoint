@@ -23,7 +23,7 @@ class HelpOrdersStudentController {
       offset: (page - 1) * 20,
     });
 
-    return res.json(help_orders);
+    return res.json({ help_orders });
   }
 
   async store(req, res) {
