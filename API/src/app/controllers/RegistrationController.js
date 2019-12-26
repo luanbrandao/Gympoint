@@ -4,7 +4,9 @@ import { startOfHour, parseISO, isPast, addMonths, format } from 'date-fns';
 import Registration from '../models/Registration';
 import Student from '../models/Student';
 import Plan from '../models/Plan';
-import Mail from '../../lib/Mail';
+// import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
+import RegistrationMail from '../jobs/RegistrationMail';
 
 class RegistrationController {
   async index(req, res) {
@@ -83,19 +85,33 @@ class RegistrationController {
       price,
     });
 
-    await Mail.sendMail({
-      to: `${student.name} <${student.email}>`,
-      subject: `Matricula atualizada!`,
-      template: 'resistration',
-      context: {
-        student: student.name,
+    // await Mail.sendMail({
+    //   to: `${student.name} <${student.email}>`,
+    //   subject: `Nova Matricula`,
+    //   template: 'resistration',
+    //   context: {
+    //     student: student.name,
+    //     start: start_date,
+    //     end: end_date,
+    //     plan: plan.title,
+    //     price,
+    //   },
+    // });
+
+    await Queue.add(RegistrationMail.key, {
+      register: {
+        student: {
+          name: student.name,
+          email: student.email,
+        },
         start: start_date,
         end: end_date,
-        plan: plan.title,
-        price,
+        plan: {
+          title: plan.title,
+          price,
+        },
       },
     });
-
     // return res.json(student);
     return res.json({
       student_id,
@@ -114,7 +130,7 @@ class RegistrationController {
       return res.status(401).json({ error: 'Registration not exist!' });
     }
 
-    const student = await Student.findByPk(registration.student_id);
+    // const student = await Student.findByPk(registration.student_id);
 
     const schema = Yup.object().shape({
       plan_id: Yup.number().required(),
@@ -150,12 +166,12 @@ class RegistrationController {
       end_date,
     });
 
-    await Mail.sendMail({
-      to: `${student.name} <${student.email}>`,
-      subject: `Matricula atualizada!`,
-      template: 'cancellation',
-      content: {},
-    });
+    // await Mail.sendMail({
+    //   to: `${student.name} <${student.email}>`,
+    //   subject: `Matricula atualizada!`,
+    //   template: 'resistration',
+    //   content: {},
+    // });
 
     return res.json({ plan_id, start_date, end_date, price });
   }

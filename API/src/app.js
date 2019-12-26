@@ -28,7 +28,7 @@ import './database';
 // yarn add nodemailer
 // templat do email
 // yarn  add express-handlebars nodemailer-express-handlebars
-
+// yarn add bee-queue
 // yarn add cors
 
 // trabalha com o tipo multipart/form-data
