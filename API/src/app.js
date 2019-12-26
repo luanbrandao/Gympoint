@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
@@ -49,6 +50,8 @@ import './database';
 // faz uma tratativa das msg de erros
 // yarn add youch
 
+// yarn add dotenv
+
 class App {
   constructor() {
     this.server = express();
@@ -78,12 +81,12 @@ class App {
   exeptionHandler() {
     this.server.use(async (err, req, res, next) => {
       // só se tiver em ambiente de desenvolvimento
-      // if (process.env.NODE_ENV === 'development') {
-      const errors = await new Youch(err, req).toJSON();
+      if (process.env.NODE_ENV === 'development') {
+        const errors = await new Youch(err, req).toJSON();
 
-      return res.status(500).json(errors);
-      // }
-      // return res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json(errors);
+      }
+      return res.status(500).json({ error: 'Internal server error' });
     });
   }
 }
