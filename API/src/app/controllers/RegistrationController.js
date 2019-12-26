@@ -85,14 +85,15 @@ class RegistrationController {
 
     await Mail.sendMail({
       to: `${student.name} <${student.email}>`,
-      subject: `Matricula realizada com sucesso!`,
-      text: `
-      Matrcula realizada com sucesso!
-      Data de início informada: ${start_date}.
-      Data de término calculada: ${end_date}.
-      Plano selecionado: ${plan.title}
-      Preço calculado: R$${price}.
-      `,
+      subject: `Matricula atualizada!`,
+      template: 'resistration',
+      context: {
+        student: student.name,
+        start: start_date,
+        end: end_date,
+        plan: plan.title,
+        price,
+      },
     });
 
     // return res.json(student);
@@ -152,13 +153,8 @@ class RegistrationController {
     await Mail.sendMail({
       to: `${student.name} <${student.email}>`,
       subject: `Matricula atualizada!`,
-      text: `
-      Verifique os novos valores e datas!
-      Data de início informada: ${start_date}.
-      Data de término calculada: ${end_date}.
-      Plano selecionado: ${plan.title}
-      Preço calculado: R$${price}.
-      `,
+      template: 'cancellation',
+      content: {},
     });
 
     return res.json({ plan_id, start_date, end_date, price });
