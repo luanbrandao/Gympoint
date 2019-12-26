@@ -1,8 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import * as Sentry from '@sentry/node';
+import Youch from 'youch';
+import 'express-async-errors';
+
+import sentryConfig from './config/sentry';
 import rotues from './routes';
 import './database';
+
 // yarn init -y
 // yarn add express
 // para usar import
@@ -34,14 +40,28 @@ import './database';
 // trabalha com o tipo multipart/form-data
 // yarn add multer
 
+// docker run --name redisbarber -p 6379:6379 -d -t redis:alpine
+// yarn add bee-queue
+
+// Tratamento de exceções
+// yarn add @sentry/node@5.7.1
+// yarn add express-async-errors
+// faz uma tratativa das msg de erros
+// yarn add youch
+
 class App {
   constructor() {
     this.server = express();
+
+    Sentry.init(sentryConfig);
+
     this.middlewares();
     this.routes();
+    this.exeptionHandler();
   }
 
   middlewares() {
+    this.server.use(Sentry.Handlers.requestHandler());
     this.server.use(express.json());
     this.server.use(cors());
     this.server.use(
@@ -52,6 +72,19 @@ class App {
 
   routes() {
     this.server.use(rotues);
+    this.server.use(Sentry.Handlers.errorHandler());
+  }
+
+  exeptionHandler() {
+    this.server.use(async (err, req, res, next) => {
+      // só se tiver em ambiente de desenvolvimento
+      // if (process.env.NODE_ENV === 'development') {
+      const errors = await new Youch(err, req).toJSON();
+
+      return res.status(500).json(errors);
+      // }
+      // return res.status(500).json({ error: 'Internal server error' });
+    });
   }
 }
 
