@@ -31,7 +31,8 @@ export default function Register_Registrarions() {
   const [startDate, setStartDate] = useState('');
 
   const end_date = useMemo(() => {
-    const plantSelected = plans.find(p => p.id == planId);
+    const id = parseInt(planId);
+    const plantSelected = plans.find(p => p.id === id);
     const duration = plantSelected ? plantSelected.duration : 0;
 
     if (startDate) {
@@ -46,7 +47,8 @@ export default function Register_Registrarions() {
   }, [plans, startDate, planId]);
 
   const total_price = useMemo(() => {
-    const plantSelected = plans.find(p => p.id == planId);
+    const id = parseInt(planId);
+    const plantSelected = plans.find(p => p.id === id);
     const price = plantSelected ? plantSelected.price : 0;
     return price;
   }, [planId, plans]);
