@@ -23,7 +23,7 @@ const schema = Yup.object().shape({
     .email('Insira um e-mail válido')
     .required('O e-mail é obrigatório'),
   phone: Yup.string().required('O telefone é obrigatório'),
-  date_birth: Yup.string(),
+  date_birth: Yup.date(),
   weight: Yup.string(),
   height: Yup.string(),
 });
@@ -102,11 +102,16 @@ export default function Register_Student() {
             </div>
 
             <div>
-              <Input label="PESO (em kg)" name="weight" type="number" />
+              <Input
+                label="PESO (em kg)"
+                name="weight"
+                type="number"
+                step="0.01"
+              />
             </div>
 
             <div>
-              <Input label="ALTURA" name="height" type="number" />
+              <Input label="ALTURA" name="height" type="number" step="0.01" />
             </div>
           </InputGroup>
         </Form>
