@@ -100,6 +100,7 @@ export default function Edit_Plan() {
                 label="PREÇO MENSAL"
                 name="price"
                 type="number"
+                step="0.01"
               />
             </div>
 
@@ -108,7 +109,7 @@ export default function Edit_Plan() {
 
               <span>PREÇO TOTAL</span>
               {/* <span>{handleTotalPrice()}</span> */}
-              <span>{totalPrice}</span>
+              <span>{totalPrice.toFixed(2)}</span>
             </div>
           </InputGroup>
         </Form>
