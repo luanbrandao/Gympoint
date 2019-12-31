@@ -81,7 +81,7 @@ export default function Register_Student() {
           {/* <InputMask mask="+4\9 99 999 99" maskChar=" " />; */}
           {/* <Input label="SEU TELEFONE" name="phone" placeholder="93 991919191" /> */}
 
-          <p>Telefone</p>
+          <p>TELEFONE</p>
           <InputMask mask="99 99999-9999">
             {() => (
               <Input

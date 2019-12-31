@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { format, addDays } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import InputMask from 'react-input-mask';
 import {
   Container,
   Header,
@@ -31,6 +32,8 @@ const schema = Yup.object().shape({
 
 export default function Edit_Student() {
   const [student, setStudent] = useState([]);
+  const [dateNasc, setDateNasc] = useState('');
+  const [phone, setPhone] = useState('');
 
   useEffect(() => {
     const data = history.location.state.student;
@@ -43,7 +46,9 @@ export default function Edit_Student() {
     );
     data.date_birth = formattedDate;
     setStudent(data);
-  }, []);
+    setDateNasc(student.date_birth);
+    setPhone(student.phone);
+  }, [student.date_birth, student.phone]);
 
   async function handleSubmit(data) {
     const { id } = student;
@@ -103,31 +108,55 @@ export default function Edit_Student() {
             type="email"
             placeholder="exemplo@gmail.com"
           />
-          <Input
+          {/* <Input
             label="TELEFONE"
             name="phone"
             type="text"
             placeholder="93 991919191"
-          />
+          /> */}
+
+          <p>TELEFONE</p>
+          <InputMask
+            mask="99 99999-9999"
+            value={phone}
+            onChange={e => setPhone(e.target.value)}
+          >
+            {() => (
+              <Input
+                type="text"
+                name="phone"
+                // placeholder="93 991919191"
+                required
+              />
+            )}
+          </InputMask>
           <InputGroup>
             {/* <div>
               <Input label="Data Nasc." name="date_birth" type="date" />
             </div> */}
 
             <div>
-              <Input
-                label="DATA/NASC"
-                name="date_birth"
-                type="date"
-                placeholder="93 991919191"
-              />
-            </div>
-            <div>
-              <Input label="PESO (em kg)" name="weight" type="number" />
+              <p>DATA/NASC</p>
+              <InputMask
+                mask="99/99/9999"
+                value={dateNasc}
+                onChange={e => setDateNasc(e.target.value)}
+              >
+                {() => <Input type="text" name="date_birth" required />}
+              </InputMask>
             </div>
 
             <div>
-              <Input label="ALTURA" name="height" type="number" />
+              <Input
+                label="PESO (em kg)"
+                name="weight"
+                type="number"
+                step="0.01"
+              />
+            </div>
+
+            <div>
+              <Input label="ALTURA" name="height" type="number" step="0.01" />
             </div>
           </InputGroup>
         </Form>
