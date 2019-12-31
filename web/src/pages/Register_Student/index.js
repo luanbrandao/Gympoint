@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
+import InputMask from 'react-input-mask';
+
 import {
   Container,
   Header,
@@ -76,15 +78,27 @@ export default function Register_Student() {
             type="email"
             placeholder="exemplo@gmail.com"
           />
-          <Input
-            label="SEU TELEFONE"
-            name="phone"
-            type="text"
-            placeholder="93 991919191"
-          />
+          {/* <InputMask mask="+4\9 99 999 99" maskChar=" " />; */}
+          {/* <Input label="SEU TELEFONE" name="phone" placeholder="93 991919191" /> */}
+
+          <p>Telefone</p>
+          <InputMask mask="99 99999-9999">
+            {() => (
+              <Input
+                type="text"
+                name="phone"
+                placeholder="93 991919191"
+                required
+              />
+            )}
+          </InputMask>
+
           <InputGroup>
             <div>
-              <Input label="DATA/NASC" name="date_birth" type="date" />
+              <p>DATA/NASC</p>
+              <InputMask mask="99/99/9999">
+                {() => <Input type="text" name="date_birth" required />}
+              </InputMask>
             </div>
 
             <div>
