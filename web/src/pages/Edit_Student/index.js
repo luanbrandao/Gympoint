@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { format } from 'date-fns';
+import { format, addDays } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import InputMask from 'react-input-mask';
 import {
@@ -32,18 +32,18 @@ const schema = Yup.object().shape({
 
 export default function Edit_Student() {
   const [student, setStudent] = useState([]);
-  const [dateNasc, setDateNasc] = useState('');
+  // const [dateNasc, setDateNasc] = useState('');
   const [phone, setPhone] = useState('');
 
   useEffect(() => {
     const data = history.location.state.student;
     const date = new Date(data.date_birth);
-    const formattedDate = format(date, 'dd-MM-yyyy', {
+    const formattedDate = format(addDays(date, 1), 'yyyy-MM-dd', {
       locale: pt,
     });
     data.date_birth = formattedDate;
     setStudent(data);
-    setDateNasc(formattedDate);
+    // setDateNasc(formattedDate);
     setPhone(data.phone);
   }, []);
 
@@ -131,7 +131,7 @@ export default function Edit_Student() {
               <Input label="Data Nasc." name="date_birth" type="date" />
             </div> */}
 
-            <div>
+            {/* <div>
               <p>DATA/NASC</p>
               <InputMask
                 mask="99/99/9999"
@@ -140,6 +140,10 @@ export default function Edit_Student() {
               >
                 {() => <Input type="text" name="date_birth" required />}
               </InputMask>
+            </div> */}
+
+            <div>
+              <Input label="DATA/NASC" name="date_birth" type="date" />
             </div>
 
             <div>

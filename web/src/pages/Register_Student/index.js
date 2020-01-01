@@ -94,11 +94,14 @@ export default function Register_Student() {
           </InputMask>
 
           <InputGroup>
-            <div>
+            {/* <div>
               <p>DATA/NASC</p>
               <InputMask mask="99/99/9999">
                 {() => <Input type="text" name="date_birth" required />}
               </InputMask>
+            </div> */}
+            <div>
+              <Input label="DATA/NASC" name="date_birth" type="date" />
             </div>
 
             <div>

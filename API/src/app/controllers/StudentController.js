@@ -2,7 +2,6 @@ import * as Yup from 'yup';
 import { Op } from 'sequelize';
 // import { format } from 'date-fns';
 // import pt from 'date-fns/locale/pt';
-
 import Student from '../models/Student';
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -47,24 +46,14 @@ class StudentController {
     const data = req.body;
 
     // o web manda no formato 12/12/1212, converte para 12-12-1212
-    const dateBirth = data.date_birth
+    data.date_birth = data.date_birth
       ? data.date_birth.replace(new RegExp('/', 'g'), '-')
       : null;
-    const dateFormatted = dateBirth.split('-');
-    const newDate = new Date(
-      dateFormatted[2],
-      dateFormatted[1] - 1,
-      dateFormatted[0]
-    );
-
-    data.date_birth = newDate;
-
     // como o web manda tudo como string,
     // quando mandava a string vazia data erro
     data.height = data.height ? parseFloat(data.height) : null;
     data.weight = data.weight ? parseFloat(data.weight) : null;
 
-    // return res.json(newDate);
     const {
       name,
       email,
@@ -74,7 +63,6 @@ class StudentController {
       date_birth,
       active,
     } = await Student.create(data);
-
     return res.json({ name, email, phone, height, weight, date_birth, active });
     // return res.json(data);
   }
@@ -114,17 +102,9 @@ class StudentController {
     const data = req.body;
 
     // o web manda no formato 12/12/1212, converte para 12-12-1212
-    const dateBirth = data.date_birth
+    data.date_birth = data.date_birth
       ? data.date_birth.replace(new RegExp('/', 'g'), '-')
       : null;
-    const dateFormatted = dateBirth.split('-');
-    const newDate = new Date(
-      dateFormatted[2],
-      dateFormatted[1] - 1,
-      dateFormatted[0]
-    );
-
-    data.date_birth = newDate;
     // como o web manda tudo como string,
     // quando mandava a string vazia data erro
     data.height = data.height ? parseFloat(data.height) : null;
