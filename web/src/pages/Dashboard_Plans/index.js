@@ -10,6 +10,7 @@ import {
   Table,
   Edite,
   Delete,
+  NotExist,
 } from '~/pages/_layouts/dashboard/styles';
 
 import api from '~/services/api';
@@ -71,47 +72,51 @@ export default function Dashboard_Plans() {
         </Options>
       </Header>
 
-      <Main>
-        <Table id="customers">
-          <thead>
-            <tr>
-              <th>Título</th>
-              <th>Duração</th>
-              <th>Valor p/Mês</th>
-              <th>Total</th>
-              {/* <th />
+      {plans.length > 0 ? (
+        <Main>
+          <Table id="customers">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Duração</th>
+                <th>Valor p/Mês</th>
+                <th>Total</th>
+                {/* <th />
               <th /> */}
-            </tr>
-          </thead>
-
-          <tbody>
-            {plans.map(plan => (
-              <tr key={plan.id}>
-                <td>{plan.title}</td>
-                <td>
-                  {plan.duration > 1
-                    ? ` ${plan.duration} meses`
-                    : `${plan.duration} mês`}
-                </td>
-                <td>R$ {plan.price}</td>
-                <td>R$ {plan.total_price}</td>
-                <td>
-                  <Edite type="button" onClick={() => handleEdit(plan)}>
-                    <span>editar</span>
-                    <MdEdit />
-                  </Edite>
-                </td>
-                <td>
-                  <Delete type="button" onClick={() => handleDelete(plan)}>
-                    apagar
-                    <MdDelete />
-                  </Delete>
-                </td>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </Main>
+            </thead>
+
+            <tbody>
+              {plans.map(plan => (
+                <tr key={plan.id}>
+                  <td>{plan.title}</td>
+                  <td>
+                    {plan.duration > 1
+                      ? ` ${plan.duration} meses`
+                      : `${plan.duration} mês`}
+                  </td>
+                  <td>R$ {plan.price}</td>
+                  <td>R$ {plan.total_price}</td>
+                  <td>
+                    <Edite type="button" onClick={() => handleEdit(plan)}>
+                      <span>editar</span>
+                      <MdEdit />
+                    </Edite>
+                  </td>
+                  <td>
+                    <Delete type="button" onClick={() => handleDelete(plan)}>
+                      apagar
+                      <MdDelete />
+                    </Delete>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Main>
+      ) : (
+        <NotExist>Não existe planos acastradas</NotExist>
+      )}
     </Container>
   );
 }

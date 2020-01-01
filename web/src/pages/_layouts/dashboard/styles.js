@@ -129,3 +129,12 @@ export const Edite = styled.button`
 export const Delete = styled.button`
   color: ${colors.primary};
 `;
+
+export const NotExist = styled.div`
+  height: 300px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+`;

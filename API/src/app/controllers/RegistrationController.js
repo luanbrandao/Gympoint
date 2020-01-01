@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { startOfHour, parseISO, isPast, addMonths, format } from 'date-fns';
-
+import { Op } from 'sequelize';
 import Registration from '../models/Registration';
 import Student from '../models/Student';
 import Plan from '../models/Plan';
@@ -13,6 +13,14 @@ class RegistrationController {
     const { page = 1 } = req.query;
 
     const registrations = await Registration.findAll({
+      where: {
+        student_id: {
+          [Op.ne]: null,
+        },
+        plan_id: {
+          [Op.ne]: null,
+        },
+      },
       attributes: [
         'id',
         'start_date',
@@ -69,6 +77,7 @@ class RegistrationController {
     // verifica se é uma data que ainda não passou
     const hourStart = startOfHour(parseISO(start_date));
     if (isPast(hourStart, new Date())) {
+      // return res.status(400).json({ error: 'Past date are not permitted' });
       return res.status(400).json({ error: 'Past date are not permitted' });
     }
 

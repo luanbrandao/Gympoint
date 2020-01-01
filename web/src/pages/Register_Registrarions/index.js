@@ -101,7 +101,8 @@ export default function Register_Registrarions() {
       toast.success('Matricula realizado com sucesso!');
       resetForm();
     } catch (error) {
-      toast.error('Falha na matricula, tente novamente');
+      // toast.error('Falha na matricula, tente novamente');
+      toast.error(error.response.data.error);
     }
   }
 

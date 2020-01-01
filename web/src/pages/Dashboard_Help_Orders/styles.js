@@ -87,3 +87,12 @@ export const Table = styled.table`
     background-color: #fff;
   }
 `;
+
+export const NotExist = styled.div`
+  height: 300px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+`;

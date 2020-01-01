@@ -11,6 +11,7 @@ import {
   ContainerModal,
   Question,
   TextArea,
+  NotExist,
 } from './styles';
 import api from '~/services/api';
 
@@ -99,29 +100,33 @@ export default function Dashboard_Students() {
         </div>
       </Header>
 
-      <Main>
-        <Table id="customers">
-          <thead>
-            <tr>
-              <th>ALUNO</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {helpOrders.map(helpOrder => (
-              <tr key={helpOrder.id}>
-                <td>{helpOrder.student.name}</td>
-                <td>
-                  <Reply type="button" onClick={() => openModal(helpOrder)}>
-                    responder
-                    <MdReplay />
-                  </Reply>
-                </td>
+      {helpOrders.length > 0 ? (
+        <Main>
+          <Table id="customers">
+            <thead>
+              <tr>
+                <th>ALUNO</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </Main>
+            </thead>
+
+            <tbody>
+              {helpOrders.map(helpOrder => (
+                <tr key={helpOrder.id}>
+                  <td>{helpOrder.student.name}</td>
+                  <td>
+                    <Reply type="button" onClick={() => openModal(helpOrder)}>
+                      responder
+                      <MdReplay />
+                    </Reply>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Main>
+      ) : (
+        <NotExist>Não existe pedidos de auxilío acastradas</NotExist>
+      )}
     </Container>
   );
 }
