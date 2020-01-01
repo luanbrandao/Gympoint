@@ -2,8 +2,8 @@ import { MdReplay } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
+import Loading from '~/components/Loading';
 import { Header, Main } from '~/pages/_layouts/dashboard/styles';
-
 import {
   Container,
   Reply,
@@ -26,17 +26,20 @@ const customStyles = {
   },
 };
 export default function Dashboard_Students() {
+  const [loading, setLoading] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [questionStudent, setQuestionStudent] = useState({});
   const [answer, setAnswer] = useState('');
   const [helpOrders, setHelpOrders] = useState([]);
 
   async function loadHelpOrders() {
+    setLoading(false);
     const response = await api.get('help_orders');
     // executa a formatação assim que pega os dados da api
     // para executar apenas uma unica vez
     const { data } = response;
     setHelpOrders(data.help_orders);
+    setLoading(true);
   }
 
   useEffect(() => {
@@ -100,32 +103,36 @@ export default function Dashboard_Students() {
         </div>
       </Header>
 
-      {helpOrders.length > 0 ? (
-        <Main>
-          <Table id="customers">
-            <thead>
-              <tr>
-                <th>ALUNO</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {helpOrders.map(helpOrder => (
-                <tr key={helpOrder.id}>
-                  <td>{helpOrder.student.name}</td>
-                  <td>
-                    <Reply type="button" onClick={() => openModal(helpOrder)}>
-                      responder
-                      <MdReplay />
-                    </Reply>
-                  </td>
+      {loading ? (
+        helpOrders.length > 0 ? (
+          <Main>
+            <Table id="customers">
+              <thead>
+                <tr>
+                  <th>ALUNO</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Main>
+              </thead>
+
+              <tbody>
+                {helpOrders.map(helpOrder => (
+                  <tr key={helpOrder.id}>
+                    <td>{helpOrder.student.name}</td>
+                    <td>
+                      <Reply type="button" onClick={() => openModal(helpOrder)}>
+                        responder
+                        <MdReplay />
+                      </Reply>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Main>
+        ) : (
+          <NotExist>Não existe pedidos de auxilío acastradas</NotExist>
+        )
       ) : (
-        <NotExist>Não existe pedidos de auxilío acastradas</NotExist>
+        <Loading />
       )}
     </Container>
   );

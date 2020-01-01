@@ -14,15 +14,17 @@ import {
   NotExist,
 } from '~/pages/_layouts/dashboard/styles';
 import history from '~/services/history';
-
+import Loading from '~/components/Loading';
 import api from '~/services/api';
 
 export default function Dashboard_Students() {
+  const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
   const [nameStudent, setNameStudent] = useState('');
 
   useEffect(() => {
     async function loadStudents() {
+      setLoading(false);
       const response = await api.get('students');
       // executa a formatação assim que pega os dados da api
       // para executar apenas uma unica vez
@@ -31,6 +33,7 @@ export default function Dashboard_Students() {
     }
 
     loadStudents();
+    setLoading(false);
   }, []);
 
   async function getStudents() {
@@ -108,47 +111,54 @@ export default function Dashboard_Students() {
         </Options>
       </Header>
 
-      {students.length > 0 ? (
-        <Main>
-          <Table id="customers">
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>E-MAIL</th>
-                <th>Fone</th>
-                <th>IDADE</th>
-                {/* <th />
+      {loading ? (
+        students.length > 0 ? (
+          <Main>
+            <Table id="customers">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>E-MAIL</th>
+                  <th>Fone</th>
+                  <th>IDADE</th>
+                  {/* <th />
               <th /> */}
-              </tr>
-            </thead>
-
-            <tbody>
-              {students.map(student => (
-                <tr key={student.email}>
-                  <td>{student.name}</td>
-                  <td>{student.email}</td>
-                  <td>{student.phone}</td>
-                  <td>{student.age}</td>
-                  <td>
-                    <Edite type="button" onClick={() => handleEdit(student)}>
-                      {/* <Link to="/edit_student/1">editar</Link> */}
-                      <span>editar</span>
-                      <MdEdit />
-                    </Edite>
-                  </td>
-                  <td>
-                    <Delete type="button" onClick={() => handleDelete(student)}>
-                      apagar
-                      <MdDelete />
-                    </Delete>
-                  </td>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Main>
+              </thead>
+
+              <tbody>
+                {students.map(student => (
+                  <tr key={student.email}>
+                    <td>{student.name}</td>
+                    <td>{student.email}</td>
+                    <td>{student.phone}</td>
+                    <td>{student.age}</td>
+                    <td>
+                      <Edite type="button" onClick={() => handleEdit(student)}>
+                        {/* <Link to="/edit_student/1">editar</Link> */}
+                        <span>editar</span>
+                        <MdEdit />
+                      </Edite>
+                    </td>
+                    <td>
+                      <Delete
+                        type="button"
+                        onClick={() => handleDelete(student)}
+                      >
+                        apagar
+                        <MdDelete />
+                      </Delete>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Main>
+        ) : (
+          <NotExist>Não existe estudantes acastradas</NotExist>
+        )
       ) : (
-        <NotExist>Não existe estudantes acastradas</NotExist>
+        <Loading />
       )}
     </Container>
   );

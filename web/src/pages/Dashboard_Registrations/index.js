@@ -16,12 +16,15 @@ import {
 } from '~/pages/_layouts/dashboard/styles';
 import api from '~/services/api';
 import history from '~/services/history';
+import Loading from '~/components/Loading';
 
 export default function Dashboard_Registrations() {
   const [registrations, setRegistrations] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadregistrations() {
+      setLoading(false);
       const response = await api.get('registrations');
       // executa a formatação assim que pega os dados da api
       // para executar apenas uma unica vez
@@ -42,6 +45,7 @@ export default function Dashboard_Registrations() {
       });
 
       setRegistrations(formattedDate);
+      setLoading(true);
     }
 
     loadregistrations();
@@ -103,59 +107,63 @@ export default function Dashboard_Registrations() {
         </Options>
       </Header>
 
-      {registrations.length > 0 ? (
-        <Main>
-          <Table id="customers">
-            <thead>
-              <tr>
-                <th>ALUNO</th>
-                <th>Plano</th>
-                <th>INÍCIO</th>
-                <th>TÉRMINO</th>
-                <th>ATIVO</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {registrations.map(registration => (
-                <tr key={registration.id}>
-                  <td>{registration.student.name}</td>
-                  <td>{registration.plan.title}</td>
-                  <td>{registration.start_date}</td>
-                  <td>{registration.end_date}</td>
-                  <td>
-                    {registration.active ? (
-                      <MdCheckCircle size={20} color="#00FF00" />
-                    ) : (
-                      <MdCheckCircle size={20} />
-                    )}
-                  </td>
-                  <td>
-                    <Edite
-                      type="button"
-                      onClick={() => handleEdit(registration)}
-                    >
-                      {/* <Link to="/edit_student/1">editar</Link> */}
-                      <span>editar</span>
-                      <MdEdit />
-                    </Edite>
-                  </td>
-                  <td>
-                    <Delete
-                      type="button"
-                      onClick={() => handleDelete(registration)}
-                    >
-                      apagar
-                      <MdDelete />
-                    </Delete>
-                  </td>
+      {loading ? (
+        registrations.length > 0 ? (
+          <Main>
+            <Table id="customers">
+              <thead>
+                <tr>
+                  <th>ALUNO</th>
+                  <th>Plano</th>
+                  <th>INÍCIO</th>
+                  <th>TÉRMINO</th>
+                  <th>ATIVO</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Main>
+              </thead>
+
+              <tbody>
+                {registrations.map(registration => (
+                  <tr key={registration.id}>
+                    <td>{registration.student.name}</td>
+                    <td>{registration.plan.title}</td>
+                    <td>{registration.start_date}</td>
+                    <td>{registration.end_date}</td>
+                    <td>
+                      {registration.active ? (
+                        <MdCheckCircle size={20} color="#00FF00" />
+                      ) : (
+                        <MdCheckCircle size={20} />
+                      )}
+                    </td>
+                    <td>
+                      <Edite
+                        type="button"
+                        onClick={() => handleEdit(registration)}
+                      >
+                        {/* <Link to="/edit_student/1">editar</Link> */}
+                        <span>editar</span>
+                        <MdEdit />
+                      </Edite>
+                    </td>
+                    <td>
+                      <Delete
+                        type="button"
+                        onClick={() => handleDelete(registration)}
+                      >
+                        apagar
+                        <MdDelete />
+                      </Delete>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Main>
+        ) : (
+          <NotExist>Não existe matrículas acastradas</NotExist>
+        )
       ) : (
-        <NotExist>Não existe matrículas acastradas</NotExist>
+        <Loading />
       )}
     </Container>
   );

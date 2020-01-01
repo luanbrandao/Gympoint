@@ -2,6 +2,7 @@ import { MdAdd, MdEdit, MdDelete } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Loading from '~/components/Loading';
 import {
   Container,
   Header,
@@ -18,9 +19,11 @@ import history from '~/services/history';
 
 export default function Dashboard_Plans() {
   const [plans, setPlans] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadStudents() {
+      setLoading(false);
       const response = await api.get('plans');
       // executa a formatação assim que pega os dados da api
       // para executar apenas uma unica vez
@@ -28,6 +31,7 @@ export default function Dashboard_Plans() {
       console.tron.log('plans => ', data);
       // setPlans(data.plans);
       setPlans(data.plans);
+      setLoading(true);
     }
 
     loadStudents();
@@ -72,50 +76,54 @@ export default function Dashboard_Plans() {
         </Options>
       </Header>
 
-      {plans.length > 0 ? (
-        <Main>
-          <Table id="customers">
-            <thead>
-              <tr>
-                <th>Título</th>
-                <th>Duração</th>
-                <th>Valor p/Mês</th>
-                <th>Total</th>
-                {/* <th />
+      {loading ? (
+        plans.length > 0 ? (
+          <Main>
+            <Table id="customers">
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Duração</th>
+                  <th>Valor p/Mês</th>
+                  <th>Total</th>
+                  {/* <th />
               <th /> */}
-              </tr>
-            </thead>
-
-            <tbody>
-              {plans.map(plan => (
-                <tr key={plan.id}>
-                  <td>{plan.title}</td>
-                  <td>
-                    {plan.duration > 1
-                      ? ` ${plan.duration} meses`
-                      : `${plan.duration} mês`}
-                  </td>
-                  <td>R$ {plan.price}</td>
-                  <td>R$ {plan.total_price}</td>
-                  <td>
-                    <Edite type="button" onClick={() => handleEdit(plan)}>
-                      <span>editar</span>
-                      <MdEdit />
-                    </Edite>
-                  </td>
-                  <td>
-                    <Delete type="button" onClick={() => handleDelete(plan)}>
-                      apagar
-                      <MdDelete />
-                    </Delete>
-                  </td>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Main>
+              </thead>
+
+              <tbody>
+                {plans.map(plan => (
+                  <tr key={plan.id}>
+                    <td>{plan.title}</td>
+                    <td>
+                      {plan.duration > 1
+                        ? ` ${plan.duration} meses`
+                        : `${plan.duration} mês`}
+                    </td>
+                    <td>R$ {plan.price}</td>
+                    <td>R$ {plan.total_price}</td>
+                    <td>
+                      <Edite type="button" onClick={() => handleEdit(plan)}>
+                        <span>editar</span>
+                        <MdEdit />
+                      </Edite>
+                    </td>
+                    <td>
+                      <Delete type="button" onClick={() => handleDelete(plan)}>
+                        apagar
+                        <MdDelete />
+                      </Delete>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Main>
+        ) : (
+          <NotExist>Não existe planos acastradas</NotExist>
+        )
       ) : (
-        <NotExist>Não existe planos acastradas</NotExist>
+        <Loading />
       )}
     </Container>
   );
