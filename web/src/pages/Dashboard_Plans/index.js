@@ -2,6 +2,7 @@ import { MdAdd, MdEdit, MdDelete } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert'; // Import
 import Loading from '~/components/Loading';
 import {
   Container,
@@ -16,6 +17,8 @@ import {
 
 import api from '~/services/api';
 import history from '~/services/history';
+
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 export default function Dashboard_Plans() {
   const [plans, setPlans] = useState([]);
@@ -57,6 +60,23 @@ export default function Dashboard_Plans() {
     } catch (error) {
       toast.error('Falha ao deletar o aluno, tente novamente');
     }
+  }
+
+  function alert(plan) {
+    confirmAlert({
+      title: 'Deletar Plano',
+      message: 'tem certeza que deseja deletar esse plano?',
+      buttons: [
+        {
+          label: 'Não',
+          onClick: () => {},
+        },
+        {
+          label: 'Sim',
+          onClick: () => handleDelete(plan),
+        },
+      ],
+    });
   }
 
   return (
@@ -109,7 +129,7 @@ export default function Dashboard_Plans() {
                       </Edite>
                     </td>
                     <td>
-                      <Delete type="button" onClick={() => handleDelete(plan)}>
+                      <Delete type="button" onClick={() => alert(plan)}>
                         apagar
                         <MdDelete />
                       </Delete>

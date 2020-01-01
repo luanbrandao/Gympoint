@@ -2,6 +2,8 @@ import { MdAdd, MdSearch, MdEdit, MdDelete } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import {
   Container,
   Header,
@@ -33,7 +35,7 @@ export default function Dashboard_Students() {
     }
 
     loadStudents();
-    setLoading(false);
+    setLoading(true);
   }, []);
 
   async function getStudents() {
@@ -78,6 +80,23 @@ export default function Dashboard_Students() {
     } catch (error) {
       toast.error('Falha ao deletar o aluno, tente novamente');
     }
+  }
+
+  function alert(student) {
+    confirmAlert({
+      title: 'Deletar Aluno',
+      message: 'tem certeza que deseja deletar esse aluno?',
+      buttons: [
+        {
+          label: 'Não',
+          onClick: () => {},
+        },
+        {
+          label: 'Sim',
+          onClick: () => handleDelete(student),
+        },
+      ],
+    });
   }
 
   return (
@@ -135,6 +154,7 @@ export default function Dashboard_Students() {
                     <td>{student.age}</td>
                     <td>
                       <Edite type="button" onClick={() => handleEdit(student)}>
+                        {/* <Edite type="button" onClick={() => submit()}> */}
                         {/* <Link to="/edit_student/1">editar</Link> */}
                         <span>editar</span>
                         <MdEdit />
@@ -143,7 +163,8 @@ export default function Dashboard_Students() {
                     <td>
                       <Delete
                         type="button"
-                        onClick={() => handleDelete(student)}
+                        // onClick={() => handleDelete(student)}
+                        onClick={() => alert(student)}
                       >
                         apagar
                         <MdDelete />

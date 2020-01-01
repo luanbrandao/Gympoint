@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import pt from 'date-fns/locale/pt';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import {
   Container,
   Header,
@@ -86,8 +88,25 @@ export default function Dashboard_Registrations() {
       toast.success('Matricula deletado com sucesso!');
       getRegistrations();
     } catch (error) {
-      toast.error('Falha ao deletar a matricula, tente novamente');
+      toast.error('Falha ao deletar a matrícula, tente novamente');
     }
+  }
+
+  function alert(register) {
+    confirmAlert({
+      title: 'Deletar Matrícula',
+      message: 'tem certeza que deseja deletar essa matrícula?',
+      buttons: [
+        {
+          label: 'Não',
+          onClick: () => {},
+        },
+        {
+          label: 'Sim',
+          onClick: () => handleDelete(register),
+        },
+      ],
+    });
   }
 
   return (
@@ -146,10 +165,7 @@ export default function Dashboard_Registrations() {
                       </Edite>
                     </td>
                     <td>
-                      <Delete
-                        type="button"
-                        onClick={() => handleDelete(registration)}
-                      >
+                      <Delete type="button" onClick={() => alert(registration)}>
                         apagar
                         <MdDelete />
                       </Delete>
