@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { format, addDays } from 'date-fns';
+import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import InputMask from 'react-input-mask';
 import {
@@ -37,29 +37,25 @@ export default function Edit_Student() {
 
   useEffect(() => {
     const data = history.location.state.student;
-    const formattedDate = format(
-      addDays(new Date(data.date_birth), 1),
-      'yyyy-MM-dd',
-      {
-        locale: pt,
-      }
-    );
+    const date = new Date(data.date_birth);
+    const formattedDate = format(date, 'dd-MM-yyyy', {
+      locale: pt,
+    });
     data.date_birth = formattedDate;
     setStudent(data);
-    setDateNasc(student.date_birth);
-    setPhone(student.phone);
-  }, [student.date_birth, student.phone]);
+    setDateNasc(formattedDate);
+    setPhone(data.phone);
+  }, []);
 
   async function handleSubmit(data) {
     const { id } = student;
     const newData = { ...data, id };
-    // console.log('new date ', newData);
     try {
       await api.put('students', newData);
       toast.success('Aluno atualizado');
       history.push('/dashboard_students', { student });
     } catch (error) {
-      toast.error('Falha ao atualizar o aluno, tente novamente');
+      toast.error(error.response.data.error);
     }
   }
 

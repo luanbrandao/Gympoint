@@ -23,7 +23,7 @@ const schema = Yup.object().shape({
     .email('Insira um e-mail válido')
     .required('O e-mail é obrigatório'),
   phone: Yup.string().required('O telefone é obrigatório'),
-  date_birth: Yup.date(),
+  date_birth: Yup.string(),
   weight: Yup.string(),
   height: Yup.string(),
 });
