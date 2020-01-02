@@ -57,7 +57,7 @@ class RegistrationController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const { student_id, plan_id, start_date } = req.body;
@@ -65,20 +65,22 @@ class RegistrationController {
     const student = await Student.findByPk(student_id);
 
     if (!student) {
-      return res.status(401).json({ error: 'Student not exist!' });
+      return res.status(401).json({ error: 'O estudante não existe!' });
     }
 
     const plan = await Plan.findByPk(plan_id);
 
     if (!plan) {
-      return res.status(401).json({ error: 'Plan not exist!' });
+      return res.status(401).json({ error: 'O plano não existe!' });
     }
 
     // verifica se é uma data que ainda não passou
     const hourStart = startOfHour(parseISO(start_date));
     if (isPast(hourStart, new Date())) {
       // return res.status(400).json({ error: 'Past date are not permitted' });
-      return res.status(400).json({ error: 'Past date are not permitted' });
+      return res
+        .status(400)
+        .json({ error: 'Datas passadas não são permitidas!' });
     }
 
     const price = plan.price * plan.duration;
@@ -136,7 +138,7 @@ class RegistrationController {
     const registration = await Registration.findByPk(registrationId);
 
     if (!registration) {
-      return res.status(401).json({ error: 'Registration not exist!' });
+      return res.status(401).json({ error: 'Matrícula nõ existe!' });
     }
 
     // const student = await Student.findByPk(registration.student_id);
@@ -147,7 +149,7 @@ class RegistrationController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const { plan_id, start_date, student_id } = req.body;
@@ -162,7 +164,9 @@ class RegistrationController {
     const hourStart = startOfHour(parseISO(start_date));
 
     if (isPast(hourStart, new Date())) {
-      return res.status(400).json({ error: 'Past date are not permitted' });
+      return res
+        .status(400)
+        .json({ error: 'Datas passadas não são permitidas!' });
     }
     const date = format(parseISO(start_date), 'yyyy/MM/dd').split('/');
     const end_date = addMonths(new Date(date), plan.duration);
@@ -190,7 +194,7 @@ class RegistrationController {
     const registration = await Registration.findByPk(registrationId);
 
     if (!registration) {
-      return res.status(401).json({ error: 'Registration not exist!' });
+      return res.status(401).json({ error: 'A matrícula não existe!' });
     }
     await registration.destroy({
       where: { id: req.params.planId },

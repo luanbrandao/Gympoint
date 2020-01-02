@@ -35,7 +35,8 @@ export default function Register_Student() {
       toast.success('Cadastro realizado com sucesso!');
       resetForm();
     } catch (error) {
-      toast.error('Falha no cadastro, tente novamente');
+      // toast.error('Falha no cadastro, tente novamente');
+      toast.error(error.response.data.error);
     }
   }
 

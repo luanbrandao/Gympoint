@@ -9,7 +9,7 @@ class HelpOrdersStudentController {
     const student = await Student.findByPk(student_id);
 
     if (!student) {
-      return res.status(401).json({ error: 'Student not exist!' });
+      return res.status(401).json({ error: 'O estudante não existe!' });
     }
 
     const { page = 1 } = req.query;
@@ -32,7 +32,7 @@ class HelpOrdersStudentController {
     const student = await Student.findByPk(student_id);
 
     if (!student) {
-      return res.status(401).json({ error: 'Student not exist!' });
+      return res.status(401).json({ error: 'O estudante não existe!' });
     }
 
     const schema = Yup.object({
@@ -40,7 +40,7 @@ class HelpOrdersStudentController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const question = await HelpOrder.create({

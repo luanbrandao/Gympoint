@@ -33,7 +33,8 @@ export default function Register_Plan() {
       toast.success('Cadastro realizado com sucesso!');
       resetForm();
     } catch (error) {
-      toast.error('Falha no cadastro, tente novamente');
+      // toast.error('Falha no cadastro, tente novamente');
+      toast.error(error.response.data.error);
     }
   }
   return (

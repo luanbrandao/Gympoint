@@ -12,7 +12,7 @@ class CheckinsController {
     });
 
     if (!(await schema.isValid(req.params))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const { student_id } = req.params;
@@ -20,7 +20,7 @@ class CheckinsController {
     const student = await Student.findByPk(student_id);
 
     if (!student) {
-      return res.status(401).json({ error: 'Student not exist!' });
+      return res.status(401).json({ error: 'O estudante não existe!' });
     }
 
     const { page = 1 } = req.query;
@@ -43,7 +43,7 @@ class CheckinsController {
     });
 
     if (!(await schema.isValid(req.params))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const { student_id } = req.params;
@@ -51,7 +51,7 @@ class CheckinsController {
     const student = await Student.findByPk(student_id);
 
     if (!student) {
-      return res.status(401).json({ error: 'Student not exist!' });
+      return res.status(401).json({ error: 'O estudante não existe!' });
     }
 
     const date = new Date();

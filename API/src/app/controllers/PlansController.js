@@ -10,7 +10,7 @@ class PlansController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const { title, duration, price } = await Plan.create(req.body);
@@ -31,13 +31,13 @@ class PlansController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const plant = await Plan.findByPk(req.params.planId);
 
     if (!plant) {
-      return res.status(401).json({ error: 'Plan does not exist!' });
+      return res.status(401).json({ error: 'O plano não existe!' });
     }
 
     const { title, duration, price } = await plant.update(req.body);
@@ -49,7 +49,7 @@ class PlansController {
     const plant = await Plan.findByPk(req.params.planId);
 
     if (!plant) {
-      return res.status(401).json({ error: 'Plan does not exist!' });
+      return res.status(401).json({ error: 'O plano não existe!' });
     }
 
     await plant.destroy({

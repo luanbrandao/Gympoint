@@ -7,8 +7,8 @@ export default async (req, res, next) => {
     if (user.provider === true) {
       return next();
     }
-    return res.status(401).json({ error: 'User is not an administrator!' });
+    return res.status(401).json({ error: 'O usuário não é administrador!' });
   }
 
-  return res.status(401).json({ error: 'Token invalid!' });
+  return res.status(401).json({ error: 'Token inválido!' });
 };

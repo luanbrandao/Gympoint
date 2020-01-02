@@ -14,7 +14,7 @@ class SessionController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const { email, password } = req.body;
@@ -30,11 +30,11 @@ class SessionController {
       ],
     });
     if (!user) {
-      return res.status(401).json({ error: 'User not fount' });
+      return res.status(401).json({ error: 'O usuário não existe!' });
     }
 
     if (!(await user.checkPassword(password))) {
-      return res.status(401).json({ error: 'Password does not match' });
+      return res.status(401).json({ error: 'Senha Inválida' });
     }
 
     const { id, name, avatar, provider, phone } = user;

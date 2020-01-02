@@ -44,7 +44,8 @@ export function* signUp({ payload }) {
     });
     history.push('/');
   } catch (error) {
-    toast.error('Falha no cadastro, verifique os dados!');
+    // toast.error('Falha no cadastro, verifique os dados!');
+    toast.error(error.response.data.error);
     yield put(signFailure());
   }
 }

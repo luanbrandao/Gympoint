@@ -15,12 +15,12 @@ class UserController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inváliods' });
     }
     const userExists = await User.findOne({ where: { email: req.body.email } });
 
     if (userExists) {
-      return res.status(400).json({ error: 'User already exists.' });
+      return res.status(400).json({ error: 'O usuáro já existe!' });
     }
     // const user = await User.create(req.body);
     const { id, name, email, phone, provider } = await User.create(req.body);
@@ -43,7 +43,7 @@ class UserController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inváliods' });
     }
 
     const { email, oldPassword } = req.body;
@@ -55,12 +55,12 @@ class UserController {
         where: { email: req.body.email },
       });
       if (userExists) {
-        return res.status(400).json({ error: 'User already exists.' });
+        return res.status(400).json({ error: 'O usuário já existe!' });
       }
     }
 
     if (oldPassword && !(await user.checkPassword(oldPassword))) {
-      return res.status(401).json({ error: 'Password does not match' });
+      return res.status(401).json({ error: 'Senha Inválida' });
     }
 
     // const { id, name, phone, provider } = await user.update(req.body);

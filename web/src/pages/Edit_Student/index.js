@@ -55,6 +55,7 @@ export default function Edit_Student() {
       toast.success('Aluno atualizado');
       history.push('/dashboard_students', { student });
     } catch (error) {
+      // toast.error(error.response.data.error);
       toast.error(error.response.data.error);
     }
   }

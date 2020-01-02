@@ -8,7 +8,7 @@ class SessionStudentController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const { id } = req.body;
@@ -16,10 +16,10 @@ class SessionStudentController {
     const student = await Student.findByPk(id);
 
     if (!student) {
-      return res.status(401).json({ error: 'Student not exist!' });
+      return res.status(401).json({ error: 'O estudante não existe!' });
     }
 
-    return res.json({student});
+    return res.json({ student });
   }
 }
 

@@ -10,7 +10,7 @@ class UnansweredHelpOrders {
     const student = await Student.findByPk(student_id);
 
     if (!student) {
-      return res.status(401).json({ error: 'Student not exist!' });
+      return res.status(401).json({ error: 'O estudante não existe!' });
     }
 
     const { page = 1 } = req.query;
@@ -34,7 +34,7 @@ class UnansweredHelpOrders {
     const help_order = await HelpOrder.findByPk(help_orders_id);
 
     if (!help_order) {
-      return res.status(401).json({ error: 'Help orders not exist!' });
+      return res.status(401).json({ error: 'Pedido de ajuda não existe!' });
     }
 
     const schema = Yup.object({
@@ -42,7 +42,7 @@ class UnansweredHelpOrders {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const date = new Date();

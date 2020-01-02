@@ -110,7 +110,8 @@ export default function Edit_Registrations() {
       toast.success('Matricula atualizada com sucesso!');
       resetForm();
     } catch (error) {
-      toast.error('Falha ao atualizar a matricula, tente novamente');
+      // toast.error('Falha ao atualizar a matricula, tente novamente');
+      toast.error(error.response.data.error);
     }
   }
 

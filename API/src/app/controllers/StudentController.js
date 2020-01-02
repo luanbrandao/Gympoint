@@ -28,11 +28,14 @@ class StudentController {
       name: Yup.string(),
       email: Yup.string().email(),
       // valida o numero de telefone
-      phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+      phone: Yup.string().matches(
+        phoneRegExp,
+        'O formato do telefone está incorreto!'
+      ),
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const studentExists = await Student.findOne({
@@ -40,7 +43,7 @@ class StudentController {
     });
 
     if (studentExists) {
-      return res.status(400).json({ error: 'Student already exists.' });
+      return res.status(400).json({ error: 'Esse estudante já existe.' });
     }
 
     const data = req.body;
@@ -75,11 +78,14 @@ class StudentController {
         .integer(),
       email: Yup.string().email(),
       // valida o numero de telefone
-      phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+      phone: Yup.string().matches(
+        phoneRegExp,
+        'O formato do telefone está incorreto!'
+      ),
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails id' });
+      return res.status(400).json({ error: 'Campos Inválidos' });
     }
 
     const { id, email } = req.body;
@@ -87,7 +93,7 @@ class StudentController {
     const student = await Student.findByPk(id);
 
     if (!student) {
-      return res.status(401).json({ error: 'Student not exist' });
+      return res.status(401).json({ error: 'Estudante não existe!' });
     }
 
     if (email !== student.email) {
@@ -95,7 +101,7 @@ class StudentController {
         where: { email: req.body.email },
       });
       if (studentExists) {
-        return res.status(400).json({ error: 'Email already exists.' });
+        return res.status(400).json({ error: 'Esse email já está em uso.' });
       }
     }
 
@@ -128,7 +134,7 @@ class StudentController {
     const student = await Student.findByPk(id);
 
     if (!student) {
-      return res.status(401).json({ error: 'Student not exist!' });
+      return res.status(401).json({ error: 'Estudante não existe!' });
     }
 
     await student.destroy({

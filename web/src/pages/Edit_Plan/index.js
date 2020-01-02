@@ -44,7 +44,8 @@ export default function Edit_Plan() {
       toast.success('Plano atualizado');
       history.push('/dashboard_plans');
     } catch (error) {
-      toast.error('Falha ao atualizar o plano, tente novamente');
+      // toast.error('Falha ao atualizar o plano, tente novamente');
+      toast.error(error.response.data.error);
     }
   }
 
