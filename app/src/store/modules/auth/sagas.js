@@ -29,13 +29,14 @@ export function* signIn({ payload }) {
     // yield delay(3000);
     yield put(signInSuccess(student));
   } catch (error) {
-    console.tron.log('error => ', error);
-    Alert.alert(
-      'Falha na autenticação',
-      // 'Houve um erro no login, verifique seus dados'
+    console.tron.log('error => ', error.response.data.error);
+
+    const msg =
+      error.response.data.error.message ||
       error.response.data.error ||
-        'Houve um erro no login, verifique seus dados'
-    );
+      'Houve um erro no login, verifique seus dados';
+
+    Alert.alert('Falha na autenticação', msg);
     yield put(signFailure());
   }
 }

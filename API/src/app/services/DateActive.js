@@ -29,7 +29,7 @@ class DateActive {
       });
       throw new Error(`
       Sua matricula chegou ao fim, faça uma nova!
-      Termino:${formattedDate}`);
+      Término: ${formattedDate}`);
     }
 
     return start && end;
