@@ -74,6 +74,10 @@ class RegistrationController {
       return res.status(401).json({ error: 'O plano não existe!' });
     }
 
+    // // se nã o fizer isso a data perde a confi 'T03'
+    //     // o que faz com que ela fique com 1 dia a menos
+    const newStartDate = parseISO(start_date);
+
     // verifica se é uma data que ainda não passou
     const hourStart = startOfHour(parseISO(start_date));
     if (isPast(hourStart, new Date())) {
@@ -91,7 +95,7 @@ class RegistrationController {
     await Registration.create({
       student_id,
       plan_id,
-      start_date,
+      start_date: newStartDate,
       end_date,
       price,
     });
