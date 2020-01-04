@@ -12,7 +12,7 @@ class RegistrationMail {
     console.log('A fila executou');
     const { register } = data;
     await Mail.sendMail({
-      to: `kd@gmil.com <${register.student.email}> `,
+      to: `gympoint@gmil.com <${register.student.email}> `,
       subject: 'Nova Matricula',
       // text: 'Você tem um novo cancelamento',
       template: 'resistration',

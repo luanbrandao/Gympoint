@@ -1,7 +1,9 @@
 import * as Yup from 'yup';
 import Student from '../models/Student';
 import HelpOrder from '../models/HelpOrder';
-import Mail from '../../lib/Mail';
+// import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
+import AnswerMail from '../jobs/AnswerMail';
 
 class UnansweredHelpOrders {
   async index(req, res) {
@@ -55,15 +57,24 @@ class UnansweredHelpOrders {
 
     const student = await Student.findByPk(help_order.student_id);
 
-    await Mail.sendMail({
-      to: `${student.name} <${student.email}>`,
-      subject: `A academia respondeu sua pergunta!`,
-      text: `
+    // await Mail.sendMail({
+    //   to: `${student.name} <${student.email}>`,
+    //   subject: `A academia respondeu sua pergunta!`,
+    //   text: `
 
-      Resposta:: ${answer.answer}.
-      Data da responta: ${answer.answer_at}.
+    //   Resposta:: ${answer.answer}.
+    //   Data da responta: ${answer.answer_at}.
 
-      `,
+    //   `,
+    // });
+    await Queue.add(AnswerMail.key, {
+      answer: {
+        student: {
+          name: student.name,
+          email: student.email,
+        },
+        message: req.body.answer,
+      },
     });
 
     return res.json(answer);
