@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import DateActive from '../services/DateActive';
 import Student from '../models/Student';
 import Registration from '../models/Registration';
+import Plan from '../models/Plan';
 
 class SessionStudentController {
   async store(req, res) {
@@ -23,7 +24,15 @@ class SessionStudentController {
     }
 
     const registration = await Registration.findOne({
+      attributes: ['id', 'start_date', 'end_date'],
       where: { student_id: student.id },
+      include: [
+        {
+          model: Plan,
+          as: 'plan',
+          attributes: ['id', 'title', 'duration', 'price', 'total_price'],
+        },
+      ],
     });
     // const registration = Registration.find({
     //   where: { id: 1 },
@@ -40,8 +49,9 @@ class SessionStudentController {
       end_date: registration.end_date,
     });
 
+    student.registration = registration;
     // return res.json(active);
-    return res.json({ student });
+    return res.json({ student, registration });
   }
 }
 
