@@ -219,3 +219,10 @@ export const InputGroup = styled.div`
     padding-top: 5px;
   }
 `;
+
+export const Error = styled.div`
+  margin: 10px;
+  color: #fb6f91;
+  font-size: 14px;
+  font-weight: bold;
+`;
