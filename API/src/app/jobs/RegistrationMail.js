@@ -22,6 +22,7 @@ class RegistrationMail {
         end: register.end,
         plan: register.plan.title,
         price: register.price,
+        cod: register.cod,
       },
     });
   }

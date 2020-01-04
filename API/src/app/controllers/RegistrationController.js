@@ -92,7 +92,7 @@ class RegistrationController {
     const date = format(parseISO(start_date), 'yyyy/MM/dd').split('/');
     const end_date = addMonths(new Date(date), plan.duration);
 
-    await Registration.create({
+    const registration = await Registration.create({
       student_id,
       plan_id,
       start_date: newStartDate,
@@ -125,6 +125,7 @@ class RegistrationController {
           title: plan.title,
           price,
         },
+        cod: registration.id,
       },
     });
     // return res.json(student);
