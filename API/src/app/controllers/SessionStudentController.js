@@ -1,5 +1,8 @@
 import * as Yup from 'yup';
+// import { isBefore, isAfter } from 'date-fns';
+import DateActive from '../services/DateActive';
 import Student from '../models/Student';
+import Registration from '../models/Registration';
 
 class SessionStudentController {
   async store(req, res) {
@@ -19,7 +22,19 @@ class SessionStudentController {
       return res.status(401).json({ error: 'O estudante não existe!' });
     }
 
-    return res.json({ student });
+    const registration = await Registration.findOne({
+      where: { student_id: student.id },
+    });
+    // const registration = Registration.find({
+    //   where: { id: 1 },
+    // });
+    const active = await DateActive.run({
+      start_date: registration.start_date,
+      end_date: registration.end_date,
+    });
+
+    return res.json(active);
+    // return res.json({ student });
   }
 }
 
