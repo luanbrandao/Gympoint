@@ -68,6 +68,16 @@ class RegistrationController {
       return res.status(401).json({ error: 'O estudante não existe!' });
     }
 
+    const existRegistration = await Registration.findOne({
+      where: { student_id },
+    });
+
+    if (existRegistration) {
+      return res.status(401).json({
+        error: 'O estudante já tem uma matrícula, você pode atualizá-la',
+      });
+    }
+
     const plan = await Plan.findByPk(plan_id);
 
     if (!plan) {
