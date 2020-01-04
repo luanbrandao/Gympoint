@@ -1,4 +1,5 @@
 // import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import HelpOrder from '../models/HelpOrder';
 import Student from '../models/Student';
 
@@ -9,6 +10,9 @@ class HelpOrderstController {
     const help_orders = await HelpOrder.findAll({
       where: {
         answer: null,
+        student_id: {
+          [Op.ne]: null,
+        },
       },
       order: [['id', 'DESC']],
       limit: 20,
