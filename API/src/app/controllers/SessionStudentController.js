@@ -28,13 +28,14 @@ class SessionStudentController {
     // const registration = Registration.find({
     //   where: { id: 1 },
     // });
-    const active = await DateActive.run({
+
+    await DateActive.run({
       start_date: registration.start_date,
       end_date: registration.end_date,
     });
 
-    return res.json(active);
-    // return res.json({ student });
+    // return res.json(active);
+    return res.json({ student });
   }
 }
 
