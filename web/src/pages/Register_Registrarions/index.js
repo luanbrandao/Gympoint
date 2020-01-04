@@ -99,6 +99,8 @@ export default function Register_Registrarions() {
     try {
       await api.post('registrations', params);
       toast.success('Matricula realizado com sucesso!');
+      setPlanId(0);
+      setStartDate('');
       resetForm();
     } catch (error) {
       // toast.error('Falha na matricula, tente novamente');
