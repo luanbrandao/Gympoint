@@ -29,6 +29,12 @@ class SessionStudentController {
     //   where: { id: 1 },
     // });
 
+    if (!registration) {
+      return res.status(401).json({
+        error: 'Você ainda não possui matrícula, fale com um instrutor.',
+      });
+    }
+
     await DateActive.run({
       start_date: registration.start_date,
       end_date: registration.end_date,
