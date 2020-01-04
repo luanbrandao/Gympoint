@@ -31,6 +31,8 @@ export default function Register_Plan() {
     try {
       await api.post('plans', data);
       toast.success('Cadastro realizado com sucesso!');
+      setPrice(0);
+      setDuration(0);
       resetForm();
     } catch (error) {
       // toast.error('Falha no cadastro, tente novamente');
