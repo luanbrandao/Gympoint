@@ -49,7 +49,7 @@ export default function Register_Registrarions() {
   const total_price = useMemo(() => {
     const id = parseInt(planId);
     const plantSelected = plans.find(p => p.id === id);
-    const price = plantSelected ? plantSelected.price : 0;
+    const price = plantSelected ? plantSelected.total_price : 0;
     return price;
   }, [planId, plans]);
   useEffect(() => {
