@@ -1,7 +1,14 @@
 // import { format, parseISO } from 'date-fns';
 // import pt from 'date-fns/locale/pt';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import Mail from '../../lib/Mail';
 
+function formattedDate(date) {
+  return format(parseISO(date), "'dia' dd 'de' MMMM", {
+    locale: pt,
+  });
+}
 class RegistrationMail {
   get key() {
     return 'RegistrationMail';
@@ -11,6 +18,7 @@ class RegistrationMail {
   async handle({ data }) {
     console.log('A fila executou');
     const { register } = data;
+
     await Mail.sendMail({
       to: `gympoint@gmil.com <${register.student.email}> `,
       subject: 'Nova Matricula',
@@ -18,10 +26,10 @@ class RegistrationMail {
       template: 'resistration',
       context: {
         student: register.student.name,
-        start: register.start,
-        end: register.end,
+        start: formattedDate(register.start),
+        end: formattedDate(register.end),
         plan: register.plan.title,
-        price: register.price,
+        price: register.plan.price,
         cod: register.cod,
       },
     });
