@@ -24,14 +24,15 @@ class CheckinsController {
     }
 
     const { page = 1 } = req.query;
+    const limit = 6;
 
     const checkins = await Checkin.findAll({
       where: {
         student_id,
       },
       order: [['id', 'DESC']],
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit,
+      offset: (page - 1) * limit,
     });
 
     return res.json({ checkins });

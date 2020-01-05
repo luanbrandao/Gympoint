@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { Container, Title, Time } from './styles';
 
 export default function CheckIn({ data, rang }) {
-  console.tron.log('rang -> ', rang, data.index);
   const position = rang - data.index;
   const dateParsed = useMemo(() => {
     return format(parseISO(data.item.createdAt), "'dia' dd 'de' MMMM H:mm", {
