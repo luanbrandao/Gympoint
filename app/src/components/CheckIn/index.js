@@ -1,14 +1,18 @@
 import React, { useMemo } from 'react';
-import { parseISO, formatRelative } from 'date-fns';
+import { parseISO, formatRelative, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { Container, Title, Time } from './styles';
 
 export default function CheckIn({ data }) {
   const dateParsed = useMemo(() => {
-    return formatRelative(parseISO(data.item.createdAt), new Date(), {
+    return format(parseISO(data.item.createdAt), "'dia' dd 'de' MMMM H:mm", {
       locale: pt,
-      addSuffix: true,
     });
+
+    // return formatRelative(parseISO(data.item.createdAt), new Date(), {
+    //   locale: pt,
+    //   addSuffix: true,
+    // });
   }, [data.item.createdAt]);
 
   return (

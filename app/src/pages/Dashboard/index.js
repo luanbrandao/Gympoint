@@ -52,7 +52,6 @@ function Dashboard({ isFocused }) {
 }
 
 Dashboard.navigationOptions = {
-  title: 'ola mundo',
   tabBarLabel: 'Check-Ins',
   tabBarIcon: ({ tintColor }) => (
     <Icon name="check" size={20} color={tintColor} />

@@ -5,25 +5,26 @@ export const Container = styled.View`
   border: 1px solid #cecece;
   border-radius: 4px;
   height: 60px;
-  margin: 5px 15px 10px 1px;
-  padding: 10px;
 
   display: flex;
   flex-direction: row;
   align-content: center;
-  justify-content: space-between;
+  justify-content: space-around;
   flex: 1;
+
+  margin-top: 10px;
+  padding-top: 18px;
 `;
 
 export const Title = styled.Text`
-  padding: 10px;
+  /* padding: 10px;
   font-weight: bold;
-  flex: 1;
+  flex: 1; */
 `;
 export const Time = styled.Text`
-  color: #999;
+  /* color: #999;
   flex: 1;
-  flex-direction: column;
+  flex-direction: column; */
   /* align-content: center; */
   /* justify-content: space-between; */
 `;
