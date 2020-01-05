@@ -13,14 +13,15 @@ class HelpOrdersStudentController {
     }
 
     const { page = 1 } = req.query;
+    const limit = 6;
 
     const help_orders = await HelpOrder.findAll({
       where: {
         student_id,
       },
       order: [['id', 'DESC']],
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit,
+      offset: (page - 1) * limit,
     });
 
     return res.json({ help_orders });
