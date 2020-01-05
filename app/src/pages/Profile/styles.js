@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 import Button from '~/components/Button';
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.ScrollView`
   flex: 1;
 `;
 
@@ -16,6 +16,13 @@ export const ContainerProfile = styled.View`
   border-radius: 4px;
   margin: 20px;
   /* padding-bottom: 20px; */
+`;
+
+export const Header = styled.Text`
+  text-align: center;
+  /* justify-items: center; */
+  font-weight: bold;
+  font-size: 25px;
 `;
 
 export const Title = styled.Text`
