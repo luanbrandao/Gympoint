@@ -8,16 +8,23 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 
 class StudentController {
   async index(req, res) {
+    const { page = 1 } = req.query;
     const { name } = req.params;
-    // const { name } = req.body;
+    const limit = 4;
     let students;
 
     if (name) {
       students = await Student.findAll({
         where: { name: { [Op.iLike]: `%${name}%` } },
+        order: ['name'],
+        limit,
+        offset: (page - 1) * limit,
       });
     } else {
-      students = await Student.findAll();
+      students = await Student.findAll({
+        limit,
+        offset: (page - 1) * limit,
+      });
     }
 
     return res.json({ students });

@@ -1,9 +1,12 @@
+/* eslint-disable consistent-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { MdAdd, MdSearch, MdEdit, MdDelete } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import {
   Container,
   Header,
@@ -14,15 +17,18 @@ import {
   Edite,
   Delete,
   NotExist,
+  NavPages,
 } from '~/pages/_layouts/dashboard/styles';
 import history from '~/services/history';
 import Loading from '~/components/Loading';
 import api from '~/services/api';
 
 export default function Dashboard_Students() {
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
   const [nameStudent, setNameStudent] = useState('');
+  const [newPage, setNewPage] = useState(true);
 
   useEffect(() => {
     async function loadStudents() {
@@ -39,10 +45,20 @@ export default function Dashboard_Students() {
   }, []);
 
   async function getStudents() {
-    const response = await api.get('students');
+    const url = nameStudent
+      ? `students/${nameStudent}/?page=${page}`
+      : `students/?page=${page}`;
+
+    const response = await api.get(url);
     // executa a formatação assim que pega os dados da api
     // para executar apenas uma unica vez
     const { data } = response;
+
+    if (data.students.length < 4) {
+      setNewPage(false);
+    } else {
+      setNewPage(true);
+    }
     setStudents(data.students);
   }
 
@@ -52,6 +68,7 @@ export default function Dashboard_Students() {
   }
 
   async function getUserByName() {
+    setPage(1);
     console.tron.log('nameStudent => ', nameStudent);
     const response = await api.get(`students/${nameStudent}`);
     console.tron.log('get user ny name => ', response);
@@ -79,6 +96,21 @@ export default function Dashboard_Students() {
       getStudents();
     } catch (error) {
       toast.error('Falha ao deletar o aluno, tente novamente');
+    }
+  }
+
+  useEffect(() => {
+    getStudents();
+  }, [getStudents, page]);
+
+  async function paginacao(acao) {
+    if (acao === '-') {
+      if (page <= 1) return false;
+
+      setPage(page - 1);
+      // getStudents(page);
+    } else {
+      await setPage(page + 1);
     }
   }
 
@@ -130,6 +162,24 @@ export default function Dashboard_Students() {
         </Options>
       </Header>
 
+      <NavPages>
+        <div>
+          {page > 1 ? (
+            <FaLongArrowAltLeft onClick={() => paginacao('-')} />
+          ) : (
+            <FaLongArrowAltLeft color="#cecece" />
+          )}
+        </div>
+        <h3>Page: {page}</h3>
+        <div>
+          {newPage ? (
+            <FaLongArrowAltRight onClick={() => paginacao('+')} />
+          ) : (
+            <FaLongArrowAltRight color="#cecece" />
+          )}
+        </div>
+      </NavPages>
+
       {loading ? (
         students.length > 0 ? (
           <Main>
@@ -176,7 +226,11 @@ export default function Dashboard_Students() {
             </Table>
           </Main>
         ) : (
-          <NotExist>Não existe estudantes acastradas</NotExist>
+          <NotExist>
+            {page === 1
+              ? 'Não existe estudantes acastradas'
+              : 'Sua lista chegou ao fim.'}
+          </NotExist>
         )
       ) : (
         <Loading />

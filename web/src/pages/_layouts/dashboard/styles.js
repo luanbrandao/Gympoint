@@ -138,3 +138,18 @@ export const NotExist = styled.div`
   justify-content: center;
   color: red;
 `;
+
+export const NavPages = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin: 10px; */
+  font-size: 30px;
+  color: #fb6f91;
+
+  div {
+    margin-left: 15px;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+`;
