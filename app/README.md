@@ -7,7 +7,7 @@ docker run --name redisgympoint -p 6379:6379 -d -t redis:alpine
     </h1>
 </div>
 
-# Gympoint API
+# Gympoint MOBILE
 
 
 ## :wrench: Tecnologias
@@ -25,11 +25,13 @@ docker run --name redisgympoint -p 6379:6379 -d -t redis:alpine
 
 :large_orange_diamond: React Native Vector Icons
 
+:large_orange_diamond: Redux Saga
+
 
 ## :ballot_box_with_check: Execucanto o Projeto
 :heavy_check_mark: Fazer o clone do projeto
 
-:heavy_check_mark: executar o comando yarn dentro da pasta da api
+:heavy_check_mark: executar o comando yarn dentro da pasta da app
 
 :heavy_check_mark: executando o projeto
 ```
