@@ -1,5 +1,3 @@
-docker run --name redisgympoint -p 6379:6379 -d -t redis:alpine
-
 <div align="center">
     <img width="200px" src="../icon.png">
     <h1 align="center">
@@ -34,7 +32,7 @@ docker run --name redisgympoint -p 6379:6379 -d -t redis:alpine
 ## :ballot_box_with_check: Execucanto o Projeto
 :heavy_check_mark: Fazer o clone do projeto
 
-:heavy_check_mark: executar o comando yarn dentro da pasta da web
+:heavy_check_mark: executar o comando yarn dentro da pasta web
 
 :heavy_check_mark: executando o projeto
 ```

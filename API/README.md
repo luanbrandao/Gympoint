@@ -1,5 +1,3 @@
-docker run --name redisgympoint -p 6379:6379 -d -t redis:alpine
-
 <div align="center">
     <img width="200px" src="../icon.png">
     <h1 align="center">
