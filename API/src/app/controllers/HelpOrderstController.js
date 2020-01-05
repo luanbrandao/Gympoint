@@ -6,7 +6,7 @@ import Student from '../models/Student';
 class HelpOrderstController {
   async index(req, res) {
     const { page = 1 } = req.query;
-
+    const limit = 6;
     const help_orders = await HelpOrder.findAll({
       where: {
         answer: null,
@@ -15,8 +15,8 @@ class HelpOrderstController {
         },
       },
       order: [['id', 'DESC']],
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit,
+      offset: (page - 1) * limit,
       include: [
         {
           model: Student,
