@@ -10,7 +10,7 @@ export const Container = styled.View`
   flex-direction: row;
   align-content: center;
   justify-content: space-around;
-  flex: 1;
+  /* flex: 1; */
 
   margin-top: 10px;
   padding-top: 18px;

@@ -17,6 +17,10 @@ function Dashboard({ isFocused }) {
 
   async function loadCheckIns() {
     const response = await api.get(`students/${student.id}/checkins`);
+    console.tron.log(
+      'response.data.checkins -> ',
+      response.data.checkins.length
+    );
     setCheckIns(response.data.checkins);
   }
 
@@ -52,7 +56,9 @@ function Dashboard({ isFocused }) {
         <List
           data={checkIns}
           keyExtractor={item => String(item.id)}
-          renderItem={({ item, index }) => <CheckIn data={{ item, index }} />}
+          renderItem={({ item, index }) => (
+            <CheckIn data={{ item, index }} rang={checkIns.length} />
+          )}
         />
       </Container>
     </Background>

@@ -4,7 +4,9 @@ import pt from 'date-fns/locale/pt';
 import PropTypes from 'prop-types';
 import { Container, Title, Time } from './styles';
 
-export default function CheckIn({ data }) {
+export default function CheckIn({ data, rang }) {
+  console.tron.log('rang -> ', rang, data.index);
+  const position = rang - data.index;
   const dateParsed = useMemo(() => {
     return format(parseISO(data.item.createdAt), "'dia' dd 'de' MMMM H:mm", {
       locale: pt,
@@ -18,7 +20,7 @@ export default function CheckIn({ data }) {
 
   return (
     <Container>
-      <Title>Check-in #{data.index + 1}</Title>
+      <Title>Check-in #{position}</Title>
       <Time>{dateParsed}</Time>
     </Container>
   );
@@ -26,8 +28,10 @@ export default function CheckIn({ data }) {
 
 CheckIn.propTypes = {
   data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  rang: PropTypes.number,
 };
 
 CheckIn.defaultProps = {
   data: {},
+  rang: 0,
 };
