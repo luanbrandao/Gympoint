@@ -19,7 +19,7 @@ import {
 import api from '~/services/api';
 
 const schema = Yup.object().shape({
-  student: Yup.string().required('O aluno é obrigatório'),
+  student: Yup.string(),
   plan: Yup.string().required('O plano é obrigatório'),
   start_date: Yup.string().required('O data de início é obrigatória'),
 });
