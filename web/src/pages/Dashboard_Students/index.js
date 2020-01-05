@@ -1,5 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { MdAdd, MdSearch, MdEdit, MdDelete } from 'react-icons/md';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -24,11 +22,11 @@ import Loading from '~/components/Loading';
 import api from '~/services/api';
 
 export default function Dashboard_Students() {
-  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
   const [nameStudent, setNameStudent] = useState('');
   const [newPage, setNewPage] = useState(true);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function loadStudents() {
@@ -54,7 +52,7 @@ export default function Dashboard_Students() {
     // para executar apenas uma unica vez
     const { data } = response;
 
-    if (data.students.length < 4) {
+    if (data.students.length < 6) {
       setNewPage(false);
     } else {
       setNewPage(true);
@@ -101,7 +99,7 @@ export default function Dashboard_Students() {
 
   useEffect(() => {
     getStudents();
-  }, [getStudents, page]);
+  }, [page]);
 
   async function paginacao(acao) {
     if (acao === '-') {

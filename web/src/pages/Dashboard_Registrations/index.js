@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import {
   Container,
   Header,
@@ -15,6 +16,7 @@ import {
   Edite,
   Delete,
   NotExist,
+  NavPages,
 } from '~/pages/_layouts/dashboard/styles';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -23,6 +25,8 @@ import Loading from '~/components/Loading';
 export default function Dashboard_Registrations() {
   const [registrations, setRegistrations] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [newPage, setNewPage] = useState(true);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function loadregistrations() {
@@ -53,8 +57,24 @@ export default function Dashboard_Registrations() {
     loadregistrations();
   }, []);
 
+  useEffect(() => {
+    // eslint-disable-next-line no-use-before-define
+    getRegistrations();
+  }, [page]);
+
+  async function paginacao(acao) {
+    if (acao === '-') {
+      if (page <= 1) return false;
+
+      setPage(page - 1);
+      // getStudents(page);
+    } else {
+      await setPage(page + 1);
+    }
+  }
+
   async function getRegistrations() {
-    const response = await api.get('registrations');
+    const response = await api.get(`registrations/?page=${page}`);
     // executa a formatação assim que pega os dados da api
     // para executar apenas uma unica vez
     const { data } = response;
@@ -72,6 +92,12 @@ export default function Dashboard_Registrations() {
       );
       return registration;
     });
+
+    if (data.registrations.length < 6) {
+      setNewPage(false);
+    } else {
+      setNewPage(true);
+    }
 
     setRegistrations(formattedDate);
   }
@@ -126,6 +152,24 @@ export default function Dashboard_Registrations() {
         </Options>
       </Header>
 
+      <NavPages>
+        <div>
+          {page > 1 ? (
+            <FaLongArrowAltLeft onClick={() => paginacao('-')} />
+          ) : (
+            <FaLongArrowAltLeft color="#cecece" />
+          )}
+        </div>
+        <h3>Page: {page}</h3>
+        <div>
+          {newPage ? (
+            <FaLongArrowAltRight onClick={() => paginacao('+')} />
+          ) : (
+            <FaLongArrowAltRight color="#cecece" />
+          )}
+        </div>
+      </NavPages>
+
       {loading ? (
         registrations.length > 0 ? (
           <Main>
@@ -176,7 +220,11 @@ export default function Dashboard_Registrations() {
             </Table>
           </Main>
         ) : (
-          <NotExist>Não existe matrículas acastradas</NotExist>
+          <NotExist>
+            {page === 1
+              ? 'Não existe matrículas acastradas'
+              : 'Sua lista chegou ao fim.'}
+          </NotExist>
         )
       ) : (
         <Loading />

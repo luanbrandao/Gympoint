@@ -19,7 +19,14 @@ class PlansController {
   }
 
   async index(req, res) {
-    const plans = await Plan.findAll();
+    const { page = 1 } = req.query;
+    const limit = 6;
+
+    const plans = await Plan.findAll({
+      order: ['title'],
+      limit,
+      offset: (page - 1) * limit,
+    });
     return res.json({ plans });
   }
 

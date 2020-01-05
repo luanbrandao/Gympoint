@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert'; // Import
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 import Loading from '~/components/Loading';
 import {
   Container,
@@ -13,6 +14,7 @@ import {
   Edite,
   Delete,
   NotExist,
+  NavPages,
 } from '~/pages/_layouts/dashboard/styles';
 
 import api from '~/services/api';
@@ -23,6 +25,8 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 export default function Dashboard_Plans() {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [newPage, setNewPage] = useState(true);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function loadStudents() {
@@ -41,9 +45,30 @@ export default function Dashboard_Plans() {
   }, []);
 
   async function getPlans() {
-    const response = await api.get('plans');
+    const response = await api.get(`plans/?page=${page}`);
     const { data } = response;
+
+    if (data.plans.length < 6) {
+      setNewPage(false);
+    } else {
+      setNewPage(true);
+    }
     setPlans(data.plans);
+  }
+
+  useEffect(() => {
+    getPlans();
+  }, [page]);
+
+  async function paginacao(acao) {
+    if (acao === '-') {
+      if (page <= 1) return false;
+
+      setPage(page - 1);
+      // getStudents(page);
+    } else {
+      await setPage(page + 1);
+    }
   }
 
   function handleEdit(plan) {
@@ -96,6 +121,24 @@ export default function Dashboard_Plans() {
         </Options>
       </Header>
 
+      <NavPages>
+        <div>
+          {page > 1 ? (
+            <FaLongArrowAltLeft onClick={() => paginacao('-')} />
+          ) : (
+            <FaLongArrowAltLeft color="#cecece" />
+          )}
+        </div>
+        <h3>Page: {page}</h3>
+        <div>
+          {newPage ? (
+            <FaLongArrowAltRight onClick={() => paginacao('+')} />
+          ) : (
+            <FaLongArrowAltRight color="#cecece" />
+          )}
+        </div>
+      </NavPages>
+
       {loading ? (
         plans.length > 0 ? (
           <Main>
@@ -140,7 +183,11 @@ export default function Dashboard_Plans() {
             </Table>
           </Main>
         ) : (
-          <NotExist>Não existe planos acastradas</NotExist>
+          <NotExist>
+            {page === 1
+              ? 'Não existe planos acastradas'
+              : 'Sua lista chegou ao fim.'}
+          </NotExist>
         )
       ) : (
         <Loading />

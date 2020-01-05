@@ -8,9 +8,9 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 
 class StudentController {
   async index(req, res) {
-    const { page = 1 } = req.query;
     const { name } = req.params;
-    const limit = 4;
+    const { page = 1 } = req.query;
+    const limit = 6;
     let students;
 
     if (name) {

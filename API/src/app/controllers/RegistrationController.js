@@ -11,6 +11,7 @@ import RegistrationMail from '../jobs/RegistrationMail';
 class RegistrationController {
   async index(req, res) {
     const { page = 1 } = req.query;
+    const limit = 6;
 
     const registrations = await Registration.findAll({
       where: {
@@ -30,8 +31,8 @@ class RegistrationController {
         'active',
       ],
       order: [['id', 'DESC']],
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit,
+      offset: (page - 1) * limit,
       include: [
         {
           model: Student,
