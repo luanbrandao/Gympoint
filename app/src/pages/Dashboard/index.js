@@ -76,7 +76,7 @@ function Dashboard({ isFocused }) {
     const rang = response.data.checkins.length;
 
     if (rang < 6) {
-      Alert.alert('Checki-ins', 'Sua lista checgou ao fim.');
+      Alert.alert('Checki-ins', 'Sua lista chegou ao fim.');
       setStopRequest(true);
     }
     setCheckIns(data);

@@ -42,7 +42,7 @@ function Dashboard({ isFocused, navigation }) {
     const rang = response.data.help_orders.length;
 
     if (rang < 4) {
-      Alert.alert('Checki-ins', 'Sua lista checgou ao fim.');
+      Alert.alert('Checki-ins', 'Sua lista chegou ao fim.');
       setStopRequest(true);
     }
 
