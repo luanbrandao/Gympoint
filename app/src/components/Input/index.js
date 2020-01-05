@@ -13,8 +13,8 @@ function Input({ style, icon, ...rest }, ref) {
 }
 
 Input.propTypes = {
-  icon: PropTypes.string,
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  icon: PropTypes.string,
 };
 
 Input.defaultProps = {

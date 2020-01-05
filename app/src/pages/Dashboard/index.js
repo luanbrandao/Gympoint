@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Image, Alert } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
+import PropTypes from 'prop-types';
 import Background from '~/components/Background';
 import { Container, Header, List, BtnCheckIn } from './styles';
 import CheckIn from '~/components/CheckIn';
@@ -51,11 +52,28 @@ function Dashboard({ isFocused }) {
   );
 }
 
+const tabBarIcon = ({ tintColor }) => (
+  <Icon name="format-list-bulleted" size={20} color={tintColor} />
+);
+
 Dashboard.navigationOptions = {
   tabBarLabel: 'Check-Ins',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon name="check" size={20} color={tintColor} />
-  ),
+  // tabBarIcon: ({ tintColor }) => (
+  //   <Icon name="check" size={20} color={tintColor} />
+  // ),
+  tabBarIcon,
 };
 
 export default withNavigationFocus(Dashboard);
+
+tabBarIcon.propTypes = {
+  tintColor: PropTypes.string.isRequired,
+};
+
+Dashboard.propTypes = {
+  isFocused: PropTypes.bool,
+};
+
+Dashboard.defaultProps = {
+  isFocused: false,
+};

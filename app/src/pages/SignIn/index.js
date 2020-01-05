@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Image } from 'react-native';
+import PropTypes from 'prop-types';
 import Background from '~/components/Background';
 import logo from '~/assets/logo.png';
 import { signInRequest } from '~/store/modules/auth/actions';
@@ -47,3 +48,9 @@ export default function SignIn({ navigation }) {
     </Background>
   );
 }
+
+SignIn.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

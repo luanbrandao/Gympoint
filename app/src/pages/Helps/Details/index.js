@@ -3,6 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { parseISO, formatRelative } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import PropTypes from 'prop-types';
 import Background from '~/components/Background';
 import {
   Container,
@@ -71,3 +72,10 @@ Details.navigationOptions = ({ navigation }) => ({
     </TouchableOpacity>
   ),
 });
+
+Details.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
+  }).isRequired,
+};

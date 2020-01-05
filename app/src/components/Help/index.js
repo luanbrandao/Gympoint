@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { parseISO, formatRelative } from 'date-fns';
+import PropTypes from 'prop-types';
 import pt from 'date-fns/locale/pt';
 import {
   HelpContainer,
@@ -44,3 +45,12 @@ export default function Help({ data, onDetais }) {
     </HelpContainer>
   );
 }
+
+Help.propTypes = {
+  data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  onDetais: PropTypes.func.isRequired,
+};
+
+Help.defaultProps = {
+  data: {},
+};

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { withNavigationFocus } from 'react-navigation';
-
+import PropTypes from 'prop-types';
 import Background from '~/components/Background';
 import api from '~/services/api';
 import { store } from '~/store';
@@ -28,7 +28,7 @@ function Dashboard({ isFocused, navigation }) {
     navigation.navigate('HelpDetails', { help });
   }
 
-  function handleNewHelp(help) {
+  function handleNewHelp() {
     navigation.navigate('HelpNew');
   }
   return (
@@ -53,3 +53,14 @@ Dashboard.navigationOptions = {
 };
 
 export default withNavigationFocus(Dashboard);
+
+Dashboard.propTypes = {
+  isFocused: PropTypes.bool,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+Dashboard.defaultProps = {
+  isFocused: false,
+};

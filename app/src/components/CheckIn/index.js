@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import { parseISO, formatRelative, format } from 'date-fns';
+import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import PropTypes from 'prop-types';
 import { Container, Title, Time } from './styles';
 
 export default function CheckIn({ data }) {
@@ -22,3 +23,11 @@ export default function CheckIn({ data }) {
     </Container>
   );
 }
+
+CheckIn.propTypes = {
+  data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+};
+
+CheckIn.defaultProps = {
+  data: {},
+};

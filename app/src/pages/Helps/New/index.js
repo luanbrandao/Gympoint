@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import PropTypes from 'prop-types';
 import Background from '~/components/Background';
 import api from '~/services/api';
 import { store } from '~/store';
@@ -38,4 +38,11 @@ export default function New({ navigation }) {
 
 New.navigationOptions = {
   title: 'Novo pedido de ajuda',
+};
+
+New.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
+  }).isRequired,
 };
