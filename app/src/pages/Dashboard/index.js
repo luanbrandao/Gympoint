@@ -11,6 +11,7 @@ import api from '~/services/api';
 import { store } from '~/store';
 
 function Dashboard({ isFocused }) {
+  const [loading, setLoading] = useState(false);
   const [checkIns, setCheckIns] = useState([]);
   const { student } = store.getState().auth;
 
@@ -26,12 +27,15 @@ function Dashboard({ isFocused }) {
   }, [isFocused]);
 
   async function handleNewCheckIn() {
+    setLoading(true);
     try {
       await api.post(`students/${student.id}/checkins`);
       loadCheckIns();
+      setLoading(false);
     } catch (error) {
       const msg = error.response.data.error;
       Alert.alert('Atenção', msg);
+      setLoading(false);
     }
   }
 
@@ -41,7 +45,10 @@ function Dashboard({ isFocused }) {
         <Header>
           <Image source={logo} />
         </Header>
-        <BtnCheckIn onPress={handleNewCheckIn}> Novo Check-in</BtnCheckIn>
+        <BtnCheckIn loading={loading} onPress={handleNewCheckIn}>
+          {' '}
+          Novo Check-in
+        </BtnCheckIn>
         <List
           data={checkIns}
           keyExtractor={item => String(item.id)}
