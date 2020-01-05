@@ -15,7 +15,8 @@ export function* signIn({ payload }) {
     });
 
     const { student } = response.data;
-    console.tron.log('response.data =>', response.data);
+    const { registration } = response.data;
+    console.tron.log('response.registration =>', response.registration);
 
     if (!student) {
       Alert.alert('Erro no login', 'O usuário não foi encontrado');
@@ -27,7 +28,7 @@ export function* signIn({ payload }) {
     // api.defaults.headers.Authorization = `Bearer ${token}`;
 
     // yield delay(3000);
-    yield put(signInSuccess(student));
+    yield put(signInSuccess(student, registration));
   } catch (error) {
     console.tron.log('error => ', error.response.data.error);
 
